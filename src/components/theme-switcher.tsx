@@ -11,7 +11,10 @@ export function ThemeSwitcher() {
   }
 
   return (
-    <button onClick={toggleTheme}>
+    <button
+      onClick={toggleTheme}
+      className="rounded-md bg-border p-2 text-accent hover:text-white"
+    >
       <SunMoon className="size-5" />
     </button>
   )

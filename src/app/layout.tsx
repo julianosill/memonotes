@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
-      <body>
+      <body className="antialiased transition-colors">
         <ThemeColorProvider>{children}</ThemeColorProvider>
       </body>
     </html>
