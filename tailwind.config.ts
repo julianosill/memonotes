@@ -13,9 +13,22 @@ const config: Config = {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
+        memonotes: {
+          50: '#F4F8FA',
+          100: '#E6EEF3',
+          200: '#D3E0EA',
+          300: '#B5CCDB',
+          400: '#91B2C9',
+          500: '#769ABB',
+          600: '#6484AC',
+          700: '#5A76A0',
+          800: '#4C5F81',
+          900: '#405068',
+          950: '#2A3241',
+        },
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        title: 'var(--title)',
+        strong: 'var(--strong)',
         card: {
           DEFAULT: 'var(--card)',
           foreground: 'var(--card-foreground)',
@@ -38,11 +51,11 @@ const config: Config = {
         },
         border: {
           DEFAULT: 'var(--border)',
-          foreground: 'var(--border-foreground)',
+          soft: 'var(--border-soft)',
         },
         ring: {
           DEFAULT: 'var(--ring)',
-          foreground: 'var(--ring-foreground)',
+          soft: 'var(--ring-soft)',
         },
         destructive: {
           DEFAULT: 'var(--destructive)',
