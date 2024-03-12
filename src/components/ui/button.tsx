@@ -1,15 +1,15 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { ComponentProps } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 
 import { cn } from '@/utils/class-name-merge'
 
 const buttonVariants = cva(
-  'flex items-center justify-center rounded-md font-medium leading-none outline-none transition-colors focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed',
+  'flex items-center justify-center rounded-md font-medium leading-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground',
+          'bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-offset-2',
         secondary:
           'bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground',
         outline:
@@ -37,11 +37,16 @@ const buttonVariants = cva(
 type ButtonProps = ComponentProps<'button'> &
   VariantProps<typeof buttonVariants>
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
-  return (
-    <button
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
-}
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...props}
+      />
+    )
+  },
+)
+
+Button.displayName = 'Button'
