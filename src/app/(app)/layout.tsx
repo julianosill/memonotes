@@ -7,7 +7,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen gap-12 p-12">
       <Sidebar />
-      <div className="flex-1 space-y-12">
+      <div className="flex-1 space-y-8">
         <SearchForm />
         {children}
       </div>

@@ -13,7 +13,7 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-md bg-border p-2 text-accent hover:text-white"
+      className="bg-memonotes-700 dark:bg-memonotes-800 text-memonotes-200 rounded-md p-2 hover:text-white"
     >
       <SunMoon className="size-5" />
     </button>

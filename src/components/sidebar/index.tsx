@@ -1,37 +1,31 @@
 import { CirclePlus, NotebookText, Tag } from 'lucide-react'
-import { twMerge } from 'tailwind-merge'
 
 import { ThemeSwitcher } from '../theme-switcher'
+import { Button } from '../ui/button'
 import { PageButton } from './page-button'
 import { Tags } from './tags'
 
 export function Sidebar() {
   return (
-    <aside className="relative flex min-w-64 flex-col gap-20 rounded-2xl bg-primary p-10">
+    <aside className="bg-memonotes-600 dark:bg-memonotes-900 relative flex flex-col gap-20 rounded-2xl p-10 ">
       <h1 className="text-2xl font-bold text-primary-foreground">memonotes</h1>
 
       <nav className="space-y-10">
-        <button
-          className={twMerge(
-            'group flex w-full items-center gap-3 rounded-md px-4 py-3',
-            'bg-border text-sm font-medium text-primary-foreground transition-colors',
-            'hover:bg-secondary hover:text-primary',
-          )}
-        >
-          <CirclePlus className="size-4 text-secondary transition-colors group-hover:text-primary" />
+        <Button className="bg-memonotes-500 dark:bg-memonotes-800 dark:hover:bg-memonotes-700 group text-sm dark:hover:text-white">
+          <CirclePlus className="text-memonotes-300 size-4 transition-colors group-hover:text-primary dark:group-hover:text-white" />
           Adicionar nota
-        </button>
+        </Button>
 
-        <div className="flex flex-col gap-2 border-y border-border py-8">
+        <section className="border-memonotes-500 dark:border-memonotes-800 flex flex-col gap-2 border-y py-8">
           <PageButton active className="group">
-            <NotebookText className="size-5 text-secondary transition-colors group-hover:text-white" />
+            <NotebookText className="text-memonotes-400 dark:text-memonotes-600 size-5 group-hover:text-white" />
             Notas
           </PageButton>
           <PageButton className="group">
-            <Tag className="size-5 text-secondary transition-colors group-hover:text-white" />
+            <Tag className="text-memonotes-400 dark:text-memonotes-600 size-5 group-hover:text-white" />
             Tags
           </PageButton>
-        </div>
+        </section>
 
         <Tags />
       </nav>
