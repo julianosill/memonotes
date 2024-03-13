@@ -5,6 +5,7 @@ import { ChangeEvent, FormEvent, forwardRef, useState } from 'react'
 import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
 
+import { Input } from '../input'
 import { Button } from '../ui/button'
 
 interface AddNoteCardProps {
@@ -80,12 +81,22 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
         </VisuallyHidden.Root>
 
         <form className="flex flex-1 flex-col gap-4" onSubmit={handleAddNote}>
+          <Input.Root>
+            <Input.Label>Título</Input.Label>
+            <Input.Wrapper>
+              <Input.Control
+                autoFocus
+                type="email"
+                placeholder="Insira o título da sua nota..."
+              />
+            </Input.Wrapper>
+          </Input.Root>
+
           <label htmlFor="note" className="sr-only">
             Insira seu texto
           </label>
           <textarea
             id="note"
-            autoFocus
             value={content}
             onChange={handleChangeContent}
             className={twMerge(
