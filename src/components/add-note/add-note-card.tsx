@@ -5,6 +5,8 @@ import { ChangeEvent, FormEvent, forwardRef, useState } from 'react'
 import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
 
+import { useStore } from '@/app/store'
+
 import { Input } from '../input'
 import { Button } from '../ui/button'
 
@@ -14,13 +16,18 @@ interface AddNoteCardProps {
 
 export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
   ({ closeDialog }, ref) => {
+    const { isLoading, addNote } = useStore((store) => {
+      return { isLoading: store.isLoading, addNote: store.addNote }
+    })
     const [isRecording, setIsRecording] = useState(false)
-    const [isPending, setIsPending] = useState(false)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
 
     const disableSubmit =
-      isRecording || isPending || content.length <= 0 || content.length <= 0
+      isRecording ||
+      isLoading ||
+      title.trim().length <= 0 ||
+      content.trim().length <= 0
 
     function handleChangeContent(event: ChangeEvent<HTMLTextAreaElement>) {
       setContent(event.target.value)
@@ -32,15 +39,14 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
 
     async function handleAddNote(event: FormEvent<HTMLFormElement>) {
       event.preventDefault()
-      setIsPending(true)
-
-      await new Promise((resolve) => setTimeout(resolve, 500))
-
-      console.log(title, content)
-
-      setIsPending(false)
-      toast.success('Nota adicionada com sucesso!')
-      closeDialog()
+      await addNote({ title, content, tags: ['js', 'node', 'test'] }).then(
+        () => {
+          toast.success('Nota adicionada com sucesso!')
+          setTitle('')
+          setContent('')
+          closeDialog()
+        },
+      )
     }
 
     return (
@@ -115,7 +121,7 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
               </Button>
             </Dialog.Close>
             <Button type="submit" disabled={disableSubmit}>
-              {isPending ? (
+              {isLoading ? (
                 <>
                   <LoaderCircle className="size-5 animate-spin" />
                   Salvando...

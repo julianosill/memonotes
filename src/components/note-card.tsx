@@ -1,39 +1,65 @@
-import { Trash2 } from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import { toast } from 'sonner'
+
+import { INote, useStore } from '@/app/store'
+import { formatDate } from '@/utils/format-date'
+import { getExcerpt } from '@/utils/get-excerpt'
 
 import { Button } from './ui/button'
 
-export function NoteCard() {
+interface NoteCardProps {
+  note: INote
+}
+
+export function NoteCard({ note }: NoteCardProps) {
+  const { isLoading, deleteNote } = useStore((store) => {
+    return { isLoading: store.isLoading, deleteNote: store.deleteNote }
+  })
+
+  async function handleDeleteNote() {
+    await deleteNote(note.id).then(() => {
+      toast.success('Nota deletada com sucesso!')
+    })
+  }
+
   return (
     <div className="group relative rounded-xl bg-card p-8 shadow transition-shadow hover:shadow-md dark:border dark:border-border-soft">
       <Button
+        onClick={handleDeleteNote}
         variant="ghost"
         className="absolute right-3 top-3 h-fit p-2 text-muted-foreground opacity-0 transition-all group-hover:opacity-100"
       >
-        <Trash2 className="size-4" />
+        {isLoading ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <Trash2 className="size-4" />
+        )}
+
         <span className="sr-only">Remover nota</span>
       </Button>
 
-      <span className="text-xs text-muted-foreground">24 jan 2024</span>
+      <span className="text-xs text-muted-foreground">
+        {formatDate(note.createdAt)}
+      </span>
 
-      <Link href="/note/1">
+      <Link href={`/note/${note.id}`}>
         <h2 className="py-4 text-lg font-semibold text-strong transition-colors hover:text-primary">
-          Título da nota
+          {note.title}
         </h2>
         <p className="text-sm leading-relaxed text-card-foreground">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          vehicula diam quis lacus convallis tincidunt. Suspendisse potenti.
-          Proin lacinia, lectus vitae fringilla efficitur.
+          {getExcerpt(note.content)}
         </p>
       </Link>
 
-      <section className="mt-6 flex gap-3">
-        <Button variant="muted" size="xs">
-          Typescript
-        </Button>
-        <Button variant="muted" size="xs">
-          Next.js
-        </Button>
+      <section className="mt-6 flex flex-wrap gap-3">
+        {note.tags.map((tag) => {
+          return (
+            <Button key={tag} variant="muted" size="xs">
+              {tag}
+            </Button>
+          )
+        })}
       </section>
     </div>
   )
