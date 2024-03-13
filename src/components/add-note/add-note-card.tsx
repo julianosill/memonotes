@@ -16,7 +16,11 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
   ({ closeDialog }, ref) => {
     const [isRecording, setIsRecording] = useState(false)
     const [isPending, setIsPending] = useState(false)
+    const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+
+    const disableSubmit =
+      isRecording || isPending || content.length <= 0 || content.length <= 0
 
     function handleChangeContent(event: ChangeEvent<HTMLTextAreaElement>) {
       setContent(event.target.value)
@@ -32,7 +36,7 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
 
       await new Promise((resolve) => setTimeout(resolve, 500))
 
-      console.log(content)
+      console.log(title, content)
 
       setIsPending(false)
       toast.success('Nota adicionada com sucesso!')
@@ -43,7 +47,7 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
       <Dialog.Content
         ref={ref}
         className={twMerge(
-          'fixed inset-0 flex w-full flex-col gap-4 overflow-y-auto bg-card p-8',
+          'fixed inset-0 flex w-full flex-col gap-8 overflow-y-auto bg-card p-8',
           'sm:p-12',
           'md:inset-auto md:left-1/2 md:top-1/2 md:h-[720px] md:max-h-[80vh] md:max-w-[720px] md:-translate-x-1/2 md:-translate-y-1/2',
           'md:rounded-xl md:border md:border-border-soft md:shadow-md',
@@ -80,41 +84,37 @@ export const AddNoteCard = forwardRef<HTMLDivElement, AddNoteCardProps>(
           </Dialog.Description>
         </VisuallyHidden.Root>
 
-        <form className="flex flex-1 flex-col gap-4" onSubmit={handleAddNote}>
-          <Input.Root>
+        <form className="flex flex-1 flex-col gap-6" onSubmit={handleAddNote}>
+          <Input.Root className="flex flex-col gap-2">
             <Input.Label>Título</Input.Label>
             <Input.Wrapper>
               <Input.Control
                 autoFocus
-                type="email"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder="Insira o título da sua nota..."
               />
             </Input.Wrapper>
           </Input.Root>
 
-          <label htmlFor="note" className="sr-only">
-            Insira seu texto
-          </label>
-          <textarea
-            id="note"
-            value={content}
-            onChange={handleChangeContent}
-            className={twMerge(
-              'w-full flex-1 resize-y rounded-md border border-border-soft bg-card p-4 outline-none',
-              'focus:border-ring focus:ring-2 focus:ring-ring-soft',
-            )}
-            placeholder="Inicie a gravação para transcrever sua fala ou digite seu texto..."
-          />
+          <Input.Root className="flex flex-1 flex-col gap-2">
+            <Input.Label>Conteúdo</Input.Label>
+            <Input.Wrapper className="flex-1">
+              <Input.Textarea
+                value={content}
+                onChange={handleChangeContent}
+                placeholder="Inicie a gravação para transcrever sua fala ou digite seu texto..."
+              />
+            </Input.Wrapper>
+          </Input.Root>
+
           <div className="flex justify-end gap-4">
             <Dialog.Close asChild>
               <Button type="button" variant="muted">
                 Cancelar
               </Button>
             </Dialog.Close>
-            <Button
-              type="submit"
-              disabled={isRecording || isPending || content.length <= 0}
-            >
+            <Button type="submit" disabled={disableSubmit}>
               {isPending ? (
                 <>
                   <LoaderCircle className="size-5 animate-spin" />
