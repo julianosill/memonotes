@@ -1,4 +1,5 @@
 import { Trash2 } from 'lucide-react'
+import Link from 'next/link'
 
 import { Button } from './ui/button'
 
@@ -15,15 +16,16 @@ export function NoteCard() {
 
       <span className="text-xs text-muted-foreground">24 jan 2024</span>
 
-      <h2 className="py-4 text-lg font-semibold text-strong transition-colors hover:text-primary">
-        Título da nota
-      </h2>
-
-      <p className="text-sm leading-relaxed text-card-foreground">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-        vehicula diam quis lacus convallis tincidunt. Suspendisse potenti. Proin
-        lacinia, lectus vitae fringilla efficitur.
-      </p>
+      <Link href="/note/1">
+        <h2 className="py-4 text-lg font-semibold text-strong transition-colors hover:text-primary">
+          Título da nota
+        </h2>
+        <p className="text-sm leading-relaxed text-card-foreground">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+          vehicula diam quis lacus convallis tincidunt. Suspendisse potenti.
+          Proin lacinia, lectus vitae fringilla efficitur.
+        </p>
+      </Link>
 
       <section className="mt-6 flex gap-3">
         <Button variant="muted" size="xs">
