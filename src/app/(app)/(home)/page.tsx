@@ -1,19 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { useEffect } from 'react'
-
 import { useStore } from '@/app/store'
 import { NoteCard } from '@/components/note-card'
 
 export default function Home() {
-  const { notes, fetchNotes } = useStore((store) => {
-    return { notes: store.notes, fetchNotes: store.fetchNotes }
+  const { notes } = useStore((store) => {
+    return { notes: store.notes }
   })
-
-  useEffect(() => {
-    fetchNotes()
-  }, [])
 
   return (
     <main>
