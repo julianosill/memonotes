@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { INote, useStore } from '@/app/store'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
-import { formatTime } from '@/utils/format-time'
 
 interface NoteDetailsProps {
   params: {
@@ -69,14 +68,10 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
       <footer className="mt-12 flex gap-12 border-t border-border-soft pt-6">
         <div className="flex flex-col gap-3 text-sm">
           <h3 className="font-medium text-muted-foreground">Criada em</h3>
-          <div className="flex flex-col gap-1">
-            <span className="text-muted-foreground">
-              {note?.createdAt && formatDate(note?.createdAt)}
-            </span>
-            <span className="text-muted-foreground">
-              {note?.createdAt && formatTime(note?.createdAt)}
-            </span>
-          </div>
+          <span className="text-muted-foreground">
+            {note?.createdAt &&
+              formatDate({ date: note.createdAt, withTime: true })}
+          </span>
         </div>
         <div className="flex flex-1 flex-col gap-3 text-sm">
           <h3 className="font-medium text-muted-foreground">Tags</h3>

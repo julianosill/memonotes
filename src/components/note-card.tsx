@@ -40,7 +40,7 @@ export function NoteCard({ note }: NoteCardProps) {
       </Button>
 
       <span className="text-xs text-muted-foreground">
-        {formatDate(note.createdAt)}
+        {formatDate({ date: note.createdAt })}
       </span>
 
       <Link href={`/note/${note.id}`}>
