@@ -23,7 +23,7 @@ export function Tags() {
         {uniqueTags.map((tag) => (
           <Link
             key={tag}
-            href={`/search?tag=${tag}`}
+            href={`/tag/${tag}`}
             className="text-sm font-medium text-zinc-200 hover:text-white dark:text-zinc-300 dark:hover:text-white"
           >
             {tag}

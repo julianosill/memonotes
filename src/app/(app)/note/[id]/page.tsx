@@ -78,7 +78,12 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
           <div className="flex flex-wrap gap-3">
             {note?.tags.map((tag) => {
               return (
-                <Button key={tag} variant="muted" size="xs">
+                <Button
+                  key={tag}
+                  onClick={() => router.push(`/tag/${tag}`)}
+                  variant="muted"
+                  size="xs"
+                >
                   {tag}
                 </Button>
               )

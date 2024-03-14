@@ -1,5 +1,6 @@
 import { Loader2, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { INote, useStore } from '@/app/store'
@@ -16,6 +17,8 @@ export function NoteCard({ note }: NoteCardProps) {
   const { isLoading, deleteNote } = useStore((store) => {
     return { isLoading: store.isLoading, deleteNote: store.deleteNote }
   })
+
+  const router = useRouter()
 
   async function handleDeleteNote() {
     await deleteNote(note.id).then(() => {
@@ -55,7 +58,12 @@ export function NoteCard({ note }: NoteCardProps) {
       <section className="mt-6 flex flex-wrap gap-3">
         {note.tags.map((tag) => {
           return (
-            <Button key={tag} variant="muted" size="xs">
+            <Button
+              key={tag}
+              onClick={() => router.push(`/tag/${tag}`)}
+              variant="muted"
+              size="xs"
+            >
               {tag}
             </Button>
           )
