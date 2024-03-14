@@ -27,7 +27,7 @@ export function NoteCard({ note }: NoteCardProps) {
   }
 
   return (
-    <div className="group relative rounded-xl bg-card p-8 shadow transition-shadow hover:shadow-md dark:border dark:border-border-soft">
+    <div className="group relative flex flex-col rounded-xl bg-card p-8 shadow transition-shadow hover:shadow-md dark:border dark:border-border-soft">
       <Button
         onClick={handleDeleteNote}
         variant="ghost"
@@ -46,7 +46,7 @@ export function NoteCard({ note }: NoteCardProps) {
         {formatDate({ date: note.createdAt })}
       </span>
 
-      <Link href={`/note/${note.id}`}>
+      <Link href={`/note/${note.id}`} className="flex-1">
         <h2 className="py-4 text-lg font-semibold text-strong transition-colors hover:text-primary">
           {note.title}
         </h2>
