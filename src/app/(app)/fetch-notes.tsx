@@ -6,13 +6,13 @@ import { useEffect } from 'react'
 import { useStore } from '../store'
 
 export function FetchNotes() {
-  const { fetchNotes } = useStore((store) => {
-    return { fetchNotes: store.fetchNotes }
+  const { notes, fetchNotes } = useStore((store) => {
+    return { notes: store.notes, fetchNotes: store.fetchNotes }
   })
 
   useEffect(() => {
     fetchNotes()
-  }, [])
+  }, [notes])
 
   return <span className="hidden">Fetch notes</span>
 }
