@@ -3,7 +3,7 @@ const tags = ['Typescript', 'Next.js', 'Node.js']
 export function Tags() {
   return (
     <section>
-      <span className="text-memonotes-300 dark:text-memonotes-400 text-sm font-semibold">
+      <span className="text-sm font-semibold text-memonotes-300 dark:text-memonotes-400">
         Tags
       </span>
 

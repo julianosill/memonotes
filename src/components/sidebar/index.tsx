@@ -1,8 +1,8 @@
-import { NotebookText, Tag } from 'lucide-react'
+import { NotebookText } from 'lucide-react'
 
 import { AddNoteButton } from '../add-note/add-note-button'
 import { ThemeSwitcher } from '../theme-switcher'
-import { PageButton } from './page-button'
+import { NavItem } from './nav-item'
 import { Tags } from './tags'
 
 export function Sidebar() {
@@ -10,20 +10,17 @@ export function Sidebar() {
     <aside className="relative flex flex-col gap-20 rounded-2xl bg-memonotes-600 p-10 dark:bg-memonotes-900 ">
       <h1 className="text-2xl font-bold text-primary-foreground">memonotes</h1>
 
-      <section className="space-y-10">
-        <AddNoteButton />
-        <nav className="flex flex-col gap-2 border-y border-memonotes-500 py-8 dark:border-memonotes-800">
-          <PageButton active className="group">
-            <NotebookText className="size-5 text-memonotes-400 group-hover:text-white dark:text-memonotes-600" />
+      <div className="space-y-10">
+        <nav>
+          <NavItem href="/" icon={<NotebookText />}>
             Notas
-          </PageButton>
-          <PageButton className="group">
-            <Tag className="size-5 text-memonotes-400 group-hover:text-white dark:text-memonotes-600" />
-            Tags
-          </PageButton>
+          </NavItem>
         </nav>
+        <section className="flex flex-col gap-2 border-y border-memonotes-500 py-10 dark:border-memonotes-800">
+          <AddNoteButton />
+        </section>
         <Tags />
-      </section>
+      </div>
 
       <div className="mt-auto">
         <ThemeSwitcher />
