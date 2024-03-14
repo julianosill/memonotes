@@ -29,13 +29,17 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
     event.preventDefault()
 
     if (isSubmitDisabled) {
-      return toast.error('Não é possível adicionar vazia!')
+      return toast.warning('Não é possível adicionar vazia!')
     }
 
-    const uniqueTags = Array.from(
-      new Set(tagsInString.split(',').map((tag) => tag.trim())),
-    )
-    const tags = uniqueTags.filter((tag) => tag.length > 0)
+    const uniqueTags = Array.from(new Set(tagsInString.split(' ')))
+    const shortTag = uniqueTags.find((tag) => tag.length < 3)
+
+    if (shortTag) {
+      return toast.warning('Cada Tag deve conter 3 ou mais letras.')
+    }
+
+    const tags = uniqueTags.filter((tag) => tag.length >= 3)
 
     await addNote({ title, content, tags }).then(() => {
       toast.success('Nota adicionada com sucesso!')
@@ -90,7 +94,7 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
           <Input.Control
             value={tagsInString}
             onChange={(e) => setTagsInString(e.target.value)}
-            placeholder="Separe as tags por vírgula, exemplo: nota, audio"
+            placeholder="Separe as tags por espaço, exemplo: estudos trabalho viagem"
           />
         </Input.Wrapper>
       </Input.Root>
