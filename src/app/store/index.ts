@@ -6,6 +6,7 @@ export interface INote {
   content: string
   tags: string[]
   createdAt: Date
+  updatedAt?: Date | null
 }
 
 interface IAddNote {
@@ -17,6 +18,7 @@ interface IAddNote {
 export interface INotesStore {
   notes: INote[] | null
   isLoading: boolean
+  isPending: boolean
   fetchNotes: () => Promise<void>
   getNote: (id: string) => INote | null
   addNote: (note: IAddNote) => Promise<void>
@@ -27,6 +29,7 @@ export const useStore = create<INotesStore>((set, get) => {
   return {
     notes: null,
     isLoading: false,
+    isPending: false,
 
     fetchNotes: async () => {
       set({ isLoading: true })
@@ -56,7 +59,7 @@ export const useStore = create<INotesStore>((set, get) => {
     },
 
     addNote: async ({ title, content, tags }) => {
-      set({ isLoading: true })
+      set({ isPending: true })
 
       const { notes } = get()
       const currentNotes = notes ?? []
@@ -71,7 +74,7 @@ export const useStore = create<INotesStore>((set, get) => {
       await new Promise((resolve) => setTimeout(resolve, 500))
 
       localStorage.setItem('@memonotes:notes', JSON.stringify(currentNotes))
-      set({ notes: currentNotes, isLoading: false })
+      set({ notes: currentNotes, isPending: false })
     },
 
     deleteNote: async (noteId) => {
