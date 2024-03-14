@@ -20,6 +20,7 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [tagsInString, setTagsInString] = useState('')
 
   const isSubmitDisabled =
     title.trim().length <= 0 || content.trim().length <= 0
@@ -28,10 +29,15 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
     event.preventDefault()
 
     if (isSubmitDisabled) {
-      return toast.error('A nota está vazia!')
+      return toast.error('Não é possível adicionar vazia!')
     }
 
-    await addNote({ title, content, tags: ['js', 'node', 'test'] }).then(() => {
+    const uniqueTags = Array.from(
+      new Set(tagsInString.split(',').map((tag) => tag.trim())),
+    )
+    const tags = uniqueTags.filter((tag) => tag.length > 0)
+
+    await addNote({ title, content, tags }).then(() => {
       toast.success('Nota adicionada com sucesso!')
       setTitle('')
       setContent('')
@@ -55,6 +61,7 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Insira o título da sua nota..."
+            required
           />
         </Input.Wrapper>
       </Input.Root>
@@ -72,6 +79,18 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Inicie a gravação para transcrever sua fala ou digite seu texto..."
+            required
+          />
+        </Input.Wrapper>
+      </Input.Root>
+
+      <Input.Root className="flex flex-col gap-2">
+        <Input.Label>Tags</Input.Label>
+        <Input.Wrapper>
+          <Input.Control
+            value={tagsInString}
+            onChange={(e) => setTagsInString(e.target.value)}
+            placeholder="Separe as tags por vírgula, exemplo: nota, audio"
           />
         </Input.Wrapper>
       </Input.Root>
