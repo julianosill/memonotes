@@ -30,7 +30,7 @@ export function AddNote() {
           className={twMerge(
             'fixed inset-0 flex w-full flex-col gap-8 overflow-y-auto bg-card p-8',
             'sm:p-12',
-            'md:inset-auto md:left-1/2 md:top-1/2 md:h-[720px] md:max-h-[80vh] md:max-w-[720px] md:-translate-x-1/2 md:-translate-y-1/2',
+            'md:inset-auto md:left-1/2 md:top-1/2 md:h-[960px] md:max-h-[90vh] md:max-w-[720px] md:-translate-x-1/2 md:-translate-y-1/2',
             'md:rounded-xl md:border md:border-border-soft md:shadow-md',
           )}
         >
