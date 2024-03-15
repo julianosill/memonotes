@@ -1,6 +1,6 @@
 'use client'
 
-import { CircleCheck, LoaderCircle, Mic } from 'lucide-react'
+import { CircleCheck, Info, LoaderCircle, Mic } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { INote, useStore } from '@/app/store'
 
 import { Input } from './input'
+import { Popover } from './popover'
 import { Button } from './ui/button'
 
 interface NoteFormProps {
@@ -126,7 +127,32 @@ export function NoteForm({ note, closeDialog }: NoteFormProps) {
       </Input.Root>
 
       <Input.Root className="flex flex-col gap-2">
-        <Input.Label>Tags</Input.Label>
+        <Input.Label className="flex items-center gap-2">
+          Tags
+          <Popover.Root>
+            <Popover.Trigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-fit p-1 text-muted-foreground"
+              >
+                <Info strokeWidth={1.5} className="size-5" />
+                <span className="sr-only">Excluir nota</span>
+              </Button>
+            </Popover.Trigger>
+            <Popover.Content className="flex flex-col gap-2">
+              <div className="font-medium">Observações:</div>
+              <ol className="list-inside list-decimal">
+                <li>Adicione tags separadas por espaço;</li>
+                <li>Cada tag deve conter 3 ou mais letras.</li>
+              </ol>
+              <span className="rounded border border-border-soft bg-muted px-2 py-1.5 font-mono text-xs">
+                Exemplo: estudos viagem trabalho
+              </span>
+            </Popover.Content>
+          </Popover.Root>
+        </Input.Label>
+
         <Input.Wrapper>
           <Input.Control
             value={tagsInString}
