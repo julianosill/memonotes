@@ -29,7 +29,7 @@ export function SearchForm() {
       className={twMerge(
         'group relative flex w-full max-w-64 items-center gap-4 border-b-2 py-2',
         'border-transparent text-muted-foreground',
-        'transition-colors focus-within:border-border',
+        'transition-colors focus-within:border-border focus-within:text-foreground',
       )}
     >
       <label htmlFor="search" className="sr-only">
@@ -45,7 +45,7 @@ export function SearchForm() {
         defaultValue={query ?? ''}
         placeholder="Procure em suas notas..."
         className={twMerge(
-          'w-full bg-transparent text-foreground outline-none placeholder:text-muted-foreground',
+          'w-full bg-transparent outline-none placeholder:text-muted-foreground',
         )}
         required
       />
