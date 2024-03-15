@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { INote, useStore } from '@/app/store'
+import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
 import { EditNote } from '@/components/edit-note'
 import { ParsedContent } from '@/components/parse-content'
@@ -37,15 +37,8 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
   return (
     <main className="flex-1 rounded-xl bg-card p-12 shadow transition-shadow hover:shadow-md dark:border dark:border-border-soft">
       <div className="flex items-start justify-between">
-        <Button
-          onClick={router.back}
-          variant="ghost"
-          size="sm"
-          className="text-muted-foreground"
-        >
-          <ArrowLeft className="size-4" />
-          Voltar
-        </Button>
+        <BackButton />
+
         <section className="flex justify-end gap-2">
           <DeleteNote id={note.id} title={note.title} />
           <EditNote note={note} />

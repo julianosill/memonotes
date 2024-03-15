@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { INote, useStore } from '@/app/store'
+import { BackButton } from '@/components/back-button'
 import { NoteCard } from '@/components/note-card'
 
 interface TagsProps {
@@ -34,7 +35,8 @@ export default function Tags({ params }: TagsProps) {
 
   return (
     <main>
-      <header className="mb-8 border-b border-border-soft pb-2">
+      <header className="mb-8 space-y-6 border-b border-border-soft pb-2">
+        <BackButton />
         <p className="text-sm">
           Exibindo notas contendo a tag:{' '}
           <span className="font-medium text-strong">{tag}</span>
