@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 
 import { INote, useStore } from '@/app/store'
 import { EditNote } from '@/components/edit-note'
+import { ParsedContent } from '@/components/parse-content'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
 
@@ -59,7 +60,9 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
 
       <h2 className="py-8 text-2xl font-semibold text-strong">{note.title}</h2>
 
-      <p className="leading-relaxed text-card-foreground">{note.content}</p>
+      <div className="flex flex-col gap-2 leading-relaxed text-card-foreground">
+        <ParsedContent text={note.content} />
+      </div>
 
       <footer className="mt-12 flex gap-12 border-t border-border-soft pt-6">
         <div className="flex flex-col gap-4 text-sm text-muted-foreground">
