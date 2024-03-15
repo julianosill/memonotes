@@ -25,7 +25,7 @@ export function AddNote() {
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-zinc-950/90" />
+        <Dialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
         <Dialog.Content
           className={twMerge(
             'fixed inset-0 flex w-full flex-col gap-8 overflow-y-auto bg-card p-8',

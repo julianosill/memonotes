@@ -52,7 +52,7 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
       </Tooltip.Root>
 
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-900/90" />
+        <AlertDialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
         <AlertDialog.Content
           className={twMerge(
             'fixed flex w-full flex-col gap-4 overflow-y-auto bg-card p-8',
