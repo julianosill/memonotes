@@ -51,7 +51,7 @@ export const useStore = create<INotesStore>((set, get) => {
         )
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 250))
 
       set({ notes, isLoading: false })
     },
@@ -87,7 +87,6 @@ export const useStore = create<INotesStore>((set, get) => {
 
     updateNote: async ({ id, title, content, tags }) => {
       set({ isPending: true })
-
       const { notes } = get()
 
       const noteIndex = notes.findIndex((note) => note.id === id)
@@ -97,14 +96,12 @@ export const useStore = create<INotesStore>((set, get) => {
         throw new Error('Note not found.')
       }
 
-      const noteToUpdate = notes[noteIndex]
-
       notes[noteIndex] = {
         id,
         title,
         content,
         tags,
-        createdAt: noteToUpdate.createdAt,
+        createdAt: notes[noteIndex].createdAt,
         updatedAt: new Date(),
       }
 
@@ -117,15 +114,19 @@ export const useStore = create<INotesStore>((set, get) => {
     deleteNote: async (noteId) => {
       set({ isPending: true })
       const { notes } = get()
-      const notesWithoutDeleted = notes?.filter((note) => note.id !== noteId)
+
+      const noteIndex = notes.findIndex((note) => note.id === noteId)
+
+      if (noteIndex < 0) {
+        set({ isPending: false })
+        throw new Error('Note not found.')
+      }
 
       await new Promise((resolve) => setTimeout(resolve, 500))
 
-      localStorage.setItem(
-        '@memonotes:notes',
-        JSON.stringify(notesWithoutDeleted),
-      )
-      set({ notes: notesWithoutDeleted, isPending: false })
+      notes.splice(noteIndex, 1)
+      localStorage.setItem('@memonotes:notes', JSON.stringify(notes))
+      set({ isPending: false })
     },
   }
 })

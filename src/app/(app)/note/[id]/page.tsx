@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { ArrowLeft, Trash2 } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { INote, useStore } from '@/app/store'
+import { DeleteNote } from '@/components/delete-note'
 import { EditNote } from '@/components/edit-note'
 import { ParsedContent } from '@/components/parse-content'
 import { Button } from '@/components/ui/button'
@@ -46,14 +47,7 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
           Voltar
         </Button>
         <section className="flex justify-end gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-fit p-2 text-muted-foreground"
-          >
-            <Trash2 className="size-5" />
-            <span className="sr-only">Excluir</span>
-          </Button>
+          <DeleteNote id={note.id} title={note.title} />
           <EditNote note={note} />
         </section>
       </div>
