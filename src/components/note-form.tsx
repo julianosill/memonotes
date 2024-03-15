@@ -1,26 +1,35 @@
 'use client'
 
 import { CircleCheck, LoaderCircle, Mic } from 'lucide-react'
-import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
-import { useStore } from '@/app/store'
+import { INote, useStore } from '@/app/store'
 
 import { Input } from './input'
 import { Button } from './ui/button'
 
 interface NoteFormProps {
+  note?: INote
   closeDialog: () => void
 }
 
-export function NoteForm({ closeDialog }: NoteFormProps) {
-  const { addNote, isPending } = useStore((store) => {
-    return { isPending: store.isPending, addNote: store.addNote }
+export function NoteForm({ note, closeDialog }: NoteFormProps) {
+  const { isPending, addNote, updateNote, fetchNotes } = useStore((store) => {
+    return {
+      isPending: store.isPending,
+      addNote: store.addNote,
+      updateNote: store.updateNote,
+      fetchNotes: store.fetchNotes,
+    }
   })
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [tagsInString, setTagsInString] = useState('')
+
+  const router = useRouter()
 
   const isSubmitDisabled =
     title.trim().length <= 0 || content.trim().length <= 0
@@ -29,24 +38,44 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
     event.preventDefault()
 
     if (isSubmitDisabled) {
-      return toast.warning('Não é possível adicionar vazia!')
+      return toast.warning('Não é possível adicionar uma nota vazia!')
     }
 
-    const uniqueTags = Array.from(new Set(tagsInString.split(' ')))
-    const shortTag = uniqueTags.find((tag) => tag.length < 3)
+    let tags: string[] = []
 
-    if (shortTag) {
-      return toast.warning('Cada Tag deve conter 3 ou mais letras.')
+    if (tagsInString.length > 0) {
+      tags = Array.from(new Set(tagsInString.split(/\s+/)))
+      const shortTag = tags.find((tag) => tag.length < 3)
+
+      if (shortTag) {
+        return toast.warning('Cada Tag deve conter 3 ou mais letras.')
+      }
     }
 
-    const tags = uniqueTags.filter((tag) => tag.length >= 3)
-
-    await addNote({ title, content, tags }).then(() => {
-      toast.success('Nota adicionada com sucesso!')
-      setTitle('')
-      setContent('')
-      closeDialog()
-    })
+    note
+      ? await updateNote({ id: note.id, title, content, tags })
+          .then(() => {
+            toast.success('Nota atualizada com sucesso!')
+            closeDialog()
+            router.push('/')
+            fetchNotes()
+          })
+          .catch(() => {
+            toast.error('Ops, algo deu errado!')
+          })
+      : await addNote({ title, content, tags })
+          .then(() => {
+            toast.success('Nota adicionada com sucesso!')
+            setTitle('')
+            setContent('')
+            setTagsInString('')
+            closeDialog()
+            router.push('/')
+            fetchNotes()
+          })
+          .catch(() => {
+            toast.error('Ops, algo deu errado!')
+          })
   }
 
   function handleCancel() {
@@ -54,6 +83,14 @@ export function NoteForm({ closeDialog }: NoteFormProps) {
     setContent('')
     closeDialog()
   }
+
+  useEffect(() => {
+    if (note) {
+      setTitle(note.title)
+      setContent(note.content)
+      if (note.tags) setTagsInString(note.tags.join(' '))
+    }
+  }, [note])
 
   return (
     <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit}>
