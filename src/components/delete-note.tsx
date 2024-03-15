@@ -6,6 +6,7 @@ import { twMerge } from 'tailwind-merge'
 
 import { useStore } from '@/app/store'
 
+import { Tooltip } from './tooltip'
 import { Button } from './ui/button'
 
 interface DeleteNoteProps {
@@ -34,16 +35,22 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
 
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-fit p-2 text-muted-foreground"
-        >
-          <Trash2 className={size === 'base' ? 'size-5' : 'size-4'} />
-          <span className="sr-only">Excluir nota</span>
-        </Button>
-      </AlertDialog.Trigger>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <AlertDialog.Trigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-fit p-2 text-muted-foreground"
+            >
+              <Trash2 className={size === 'base' ? 'size-5' : 'size-4'} />
+              <span className="sr-only">Excluir nota</span>
+            </Button>
+          </AlertDialog.Trigger>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Excluir nota</Tooltip.Content>
+      </Tooltip.Root>
+
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-900/90" />
         <AlertDialog.Content

@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge'
 import { INote } from '@/app/store'
 
 import { NoteForm } from './note-form'
+import { Tooltip } from './tooltip'
 import { Button } from './ui/button'
 
 interface EditNoteProps {
@@ -24,16 +25,21 @@ export function EditNote({ note }: EditNoteProps) {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-fit p-2 text-muted-foreground"
-        >
-          <NotebookPen className="size-5" />
-          <span className="sr-only">Editar nota</span>
-        </Button>
-      </Dialog.Trigger>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <Dialog.Trigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-fit p-2 text-muted-foreground"
+            >
+              <NotebookPen className="size-5" />
+              <span className="sr-only">Editar nota</span>
+            </Button>
+          </Dialog.Trigger>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Editar nota</Tooltip.Content>
+      </Tooltip.Root>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-zinc-950/90" />
         <Dialog.Content
