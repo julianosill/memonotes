@@ -55,20 +55,22 @@ export function NoteCard({ note }: NoteCardProps) {
         </p>
       </Link>
 
-      <section className="mt-6 flex flex-wrap gap-3">
-        {note.tags.map((tag) => {
-          return (
-            <Button
-              key={tag}
-              onClick={() => router.push(`/tag/${tag}`)}
-              variant="muted"
-              size="xs"
-            >
-              {tag}
-            </Button>
-          )
-        })}
-      </section>
+      {note.tags && (
+        <section className="mt-6 flex flex-wrap gap-3">
+          {note.tags.map((tag) => {
+            return (
+              <Button
+                key={tag}
+                onClick={() => router.push(`/tag/${tag}`)}
+                variant="muted"
+                size="xs"
+              >
+                {tag}
+              </Button>
+            )
+          })}
+        </section>
+      )}
     </div>
   )
 }
