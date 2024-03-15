@@ -80,7 +80,7 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
             </span>
           </div>
         </div>
-        {note.tags && (
+        {note.tags.length > 0 && (
           <div className="flex flex-1 flex-col gap-3 text-sm">
             <h3 className="font-medium text-muted-foreground">Tags</h3>
             <div className="flex flex-wrap gap-3">

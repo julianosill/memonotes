@@ -55,7 +55,7 @@ export function NoteCard({ note }: NoteCardProps) {
         </p>
       </Link>
 
-      {note.tags && (
+      {note.tags.length > 0 && (
         <section className="mt-6 flex flex-wrap gap-3">
           {note.tags.map((tag) => {
             return (
