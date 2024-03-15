@@ -45,10 +45,16 @@ export const useStore = create<INotesStore>((set, get) => {
       const notes = storage ? JSON.parse(storage) : []
 
       if (notes.length > 0) {
-        notes.sort(
-          (a: INote, b: INote) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
+        notes.sort((a: INote, b: INote) => {
+          const currentNoteDate = new Date(
+            a.updatedAt ? a.updatedAt : a.createdAt,
+          ).getTime()
+          const nextNoteDate = new Date(
+            b.updatedAt ? b.updatedAt : b.createdAt,
+          ).getTime()
+
+          return nextNoteDate - currentNoteDate
+        })
       }
 
       await new Promise((resolve) => setTimeout(resolve, 250))
