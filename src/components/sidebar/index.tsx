@@ -1,7 +1,7 @@
 import { NotebookText } from 'lucide-react'
 
-import { AddNote } from '../add-note'
 import { ThemeSwitcher } from '../theme-switcher'
+import { AddNoteButton } from './add-note-button'
 import { NavItem } from './nav-item'
 import { Tags } from './tags'
 
@@ -17,7 +17,7 @@ export function Sidebar() {
           </NavItem>
         </nav>
         <section className="flex flex-col gap-2 border-y border-memonotes-500 py-10 dark:border-memonotes-800">
-          <AddNote />
+          <AddNoteButton to="/add" />
         </section>
         <Tags />
       </div>

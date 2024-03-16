@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { INote, useStore } from '@/app/store'
 import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
-import { EditNote } from '@/components/edit-note'
+import { EditNoteButton } from '@/components/edit-note-button'
 import { ParsedContent } from '@/components/parse-content'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
@@ -35,13 +35,13 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
   if (!note) return null
 
   return (
-    <main className="flex-1 rounded-xl bg-card p-12 shadow transition-shadow hover:shadow-md dark:border dark:border-border-soft">
+    <main className="flex flex-1 flex-col rounded-2xl bg-card p-12 shadow-md dark:border dark:border-border-soft">
       <div className="flex items-start justify-between">
         <BackButton />
 
         <section className="flex justify-end gap-2">
           <DeleteNote id={note.id} title={note.title} />
-          <EditNote note={note} />
+          <EditNoteButton id={note.id} />
         </section>
       </div>
 

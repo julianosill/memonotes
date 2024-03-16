@@ -13,10 +13,9 @@ import { Button } from './ui/button'
 
 interface NoteFormProps {
   note?: INote
-  closeDialog: () => void
 }
 
-export function NoteForm({ note, closeDialog }: NoteFormProps) {
+export function NoteForm({ note }: NoteFormProps) {
   const { isPending, addNote, updateNote, fetchNotes } = useStore((store) => {
     return {
       isPending: store.isPending,
@@ -57,7 +56,6 @@ export function NoteForm({ note, closeDialog }: NoteFormProps) {
       ? await updateNote({ id: note.id, title, content, tags })
           .then(() => {
             toast.success('Nota atualizada com sucesso!')
-            closeDialog()
             router.push('/')
             fetchNotes()
           })
@@ -70,7 +68,6 @@ export function NoteForm({ note, closeDialog }: NoteFormProps) {
             setTitle('')
             setContent('')
             setTagsInString('')
-            closeDialog()
             router.push('/')
             fetchNotes()
           })
@@ -82,7 +79,6 @@ export function NoteForm({ note, closeDialog }: NoteFormProps) {
   function handleCancel() {
     setTitle('')
     setContent('')
-    closeDialog()
   }
 
   useEffect(() => {
