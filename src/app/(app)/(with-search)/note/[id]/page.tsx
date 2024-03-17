@@ -47,7 +47,7 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
 
       <h2 className="py-8 text-2xl font-semibold text-strong">{note.title}</h2>
 
-      <div className="flex flex-col gap-2 leading-relaxed text-card-foreground">
+      <div className="leading-relaxed text-card-foreground">
         <ParsedContent text={note.content} />
       </div>
 
