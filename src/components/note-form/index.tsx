@@ -1,85 +1,36 @@
 'use client'
 
-import { CircleCheck, Info, LoaderCircle, Mic } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { FormEvent, useEffect, useState } from 'react'
-import { toast } from 'sonner'
+import { CircleCheck, Info, LoaderCircle } from 'lucide-react'
+import { useEffect } from 'react'
 
-import { INote, useStore } from '@/app/store'
+import { INote } from '@/app/store'
 
-import { Input } from './input'
-import { Popover } from './popover'
-import { Button } from './ui/button'
+import { Input } from '../input'
+import { Popover } from '../popover'
+import { Button } from '../ui/button'
+import { SpeechToTextDialog } from './speech-to-text-dialog'
+import { useNoteForm } from './useNoteForm'
 
 interface NoteFormProps {
   note?: INote
 }
 
 export function NoteForm({ note }: NoteFormProps) {
-  const { isPending, addNote, updateNote, fetchNotes } = useStore((store) => {
-    return {
-      isPending: store.isPending,
-      addNote: store.addNote,
-      updateNote: store.updateNote,
-      fetchNotes: store.fetchNotes,
-    }
-  })
-
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [tagsInString, setTagsInString] = useState('')
-
-  const router = useRouter()
-
-  const isSubmitDisabled =
-    title.trim().length <= 0 || content.trim().length <= 0
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    if (isSubmitDisabled) {
-      return toast.warning('Não é possível adicionar uma nota vazia!')
-    }
-
-    let tags: string[] = []
-
-    if (tagsInString.length > 0) {
-      tags = Array.from(new Set(tagsInString.split(/\s+/)))
-      const shortTag = tags.find((tag) => tag.length < 3)
-
-      if (shortTag) {
-        return toast.warning('Cada Tag deve conter 3 ou mais letras.')
-      }
-    }
-
-    note
-      ? await updateNote({ id: note.id, title, content, tags })
-          .then(() => {
-            toast.success('Nota atualizada com sucesso!')
-            router.push('/')
-            fetchNotes()
-          })
-          .catch(() => {
-            toast.error('Ops, algo deu errado!')
-          })
-      : await addNote({ title, content, tags })
-          .then(() => {
-            toast.success('Nota adicionada com sucesso!')
-            setTitle('')
-            setContent('')
-            setTagsInString('')
-            router.push('/')
-            fetchNotes()
-          })
-          .catch(() => {
-            toast.error('Ops, algo deu errado!')
-          })
-  }
-
-  function handleCancel() {
-    setTitle('')
-    setContent('')
-  }
+  const {
+    title,
+    setTitle,
+    content,
+    setContent,
+    tagsInString,
+    setTagsInString,
+    isSpeechRecognitionAPIAvailable,
+    setIsSpeechRecognitionAPIAvailable,
+    addTranscriptionToNote,
+    isSubmitDisabled,
+    handleSubmit,
+    isPending,
+    handleCancel,
+  } = useNoteForm({ note })
 
   useEffect(() => {
     if (note) {
@@ -87,7 +38,13 @@ export function NoteForm({ note }: NoteFormProps) {
       setContent(note.content)
       if (note.tags) setTagsInString(note.tags.join(' '))
     }
-  }, [note])
+  }, [note, setTitle, setContent, setTagsInString])
+
+  useEffect(() => {
+    setIsSpeechRecognitionAPIAvailable(
+      'SpeechRecognition' in window || 'webkitSpeechRecognition' in window,
+    )
+  }, [setIsSpeechRecognitionAPIAvailable])
 
   return (
     <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit}>
@@ -98,7 +55,7 @@ export function NoteForm({ note }: NoteFormProps) {
             autoFocus
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Insira o título da sua nota..."
+            placeholder="Insira o título da sua nota"
             required
           />
         </Input.Wrapper>
@@ -107,16 +64,17 @@ export function NoteForm({ note }: NoteFormProps) {
       <Input.Root className="flex flex-1 flex-col gap-2">
         <div className="flex items-end justify-between">
           <Input.Label>Conteúdo</Input.Label>
-          <Button type="button" variant="outline" size="sm" className="w-40">
-            <Mic className="size-4 text-green-500" />
-            Iniciar gravação
-          </Button>
+          {isSpeechRecognitionAPIAvailable && (
+            <SpeechToTextDialog
+              onAddTranscriptionToNote={addTranscriptionToNote}
+            />
+          )}
         </div>
-        <Input.Wrapper className="flex-1">
+        <Input.Wrapper className="min-h-[240px] flex-1">
           <Input.Textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Inicie a gravação para transcrever sua fala ou digite seu texto..."
+            placeholder="Digite ou grave seu áudio para transcrever"
             required
           />
         </Input.Wrapper>
@@ -136,12 +94,12 @@ export function NoteForm({ note }: NoteFormProps) {
                 <span className="sr-only">Excluir nota</span>
               </Button>
             </Popover.Trigger>
-            <Popover.Content className="flex flex-col gap-2">
-              <div className="font-medium">Observações:</div>
-              <ol className="list-inside list-decimal">
+            <Popover.Content className="flex flex-col gap-3">
+              <div className="font-semibold">Observações</div>
+              <ul className="list-disc space-y-1 pl-4">
                 <li>Adicione tags separadas por espaço;</li>
                 <li>Cada tag deve conter 3 ou mais letras.</li>
-              </ol>
+              </ul>
               <span className="rounded border border-border-soft bg-muted px-2 py-1.5 font-mono text-xs">
                 Exemplo: estudos viagem trabalho
               </span>

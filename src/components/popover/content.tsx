@@ -16,7 +16,7 @@ export function Content({ children, className, ...props }: ContentProps) {
         sideOffset={4}
         side="top"
         className={twMerge(
-          'rounded-md bg-background p-3 text-sm shadow-lg ring-1 ring-border-soft',
+          'rounded-md bg-background p-4 text-sm shadow-lg ring-1 ring-border-soft',
           className,
         )}
         {...props}

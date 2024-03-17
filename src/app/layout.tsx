@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased transition-colors">
         <ThemeColorProvider>
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="top-right" closeButton />
           {children}
         </ThemeColorProvider>
       </body>
