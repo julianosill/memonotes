@@ -6,7 +6,11 @@ import { Toaster } from 'sonner'
 
 import { ThemeColorProvider } from '@/providers/theme-color-provider'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+})
 
 export const metadata: Metadata = {
   title: {
