@@ -4,7 +4,7 @@ import { ComponentProps, forwardRef } from 'react'
 import { cn } from '@/utils/class-name-merge'
 
 const buttonVariants = cva(
-  'flex items-center justify-center rounded-md font-medium leading-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed',
+  'flex items-center justify-center rounded-md font-medium leading-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
