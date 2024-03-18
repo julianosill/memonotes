@@ -62,6 +62,15 @@ const config: Config = {
           foreground: 'var(--destructive-foreground)',
         },
       },
+      keyframes: {
+        revolve: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(180deg)' },
+        },
+      },
+      animation: {
+        revolve: 'revolve 750ms ease-in-out 1',
+      },
     },
   },
   plugins: [],

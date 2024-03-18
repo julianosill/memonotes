@@ -2,9 +2,9 @@ import { NotebookText } from 'lucide-react'
 import Link from 'next/link'
 
 import { LogoMemonotes } from '../logo/memonotes'
-import { ThemeSwitcher } from '../theme-switcher'
 import { AddNoteButton } from './add-note-button'
 import { NavItem } from './nav-item'
+import { Settings } from './settings'
 import { Tags } from './tags'
 
 export function Sidebar() {
@@ -27,7 +27,7 @@ export function Sidebar() {
       </div>
 
       <div className="mt-auto">
-        <ThemeSwitcher />
+        <Settings />
       </div>
     </aside>
   )
