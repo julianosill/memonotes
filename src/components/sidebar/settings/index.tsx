@@ -6,7 +6,8 @@ import { useTheme } from 'next-themes'
 import { twMerge } from 'tailwind-merge'
 
 import { Button } from '../../ui/button'
-import { SettingsItem } from './settings-button'
+import { About } from './about'
+import { SettingsItem } from './settings-item'
 
 export function Settings() {
   const { theme, setTheme } = useTheme()
@@ -23,7 +24,7 @@ export function Settings() {
           )}
           aria-label="Configurações"
         >
-          <SettingsIcon className="group-hover:animate-revolve" />
+          <SettingsIcon className="size-5 group-hover:animate-revolve" />
         </Button>
       </DropdownMenu.Trigger>
 
@@ -32,6 +33,7 @@ export function Settings() {
           align="start"
           sideOffset={4}
           side="top"
+          onCloseAutoFocus={(e) => e.preventDefault()}
           className="space-y-4 rounded-md bg-background p-6 shadow-lg ring-1 ring-border-soft"
         >
           <DropdownMenu.Group className="space-y-1">
@@ -58,6 +60,10 @@ export function Settings() {
               <SunMoon className="size-4" /> Sistema
             </SettingsItem>
           </DropdownMenu.Group>
+
+          <DropdownMenu.Separator className="h-px bg-border-soft" />
+
+          <About />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
