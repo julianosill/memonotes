@@ -54,6 +54,7 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
         <AlertDialog.Content
+          onCloseAutoFocus={(e) => e.preventDefault()}
           className={twMerge(
             'fixed flex w-full flex-col gap-4 overflow-y-auto bg-card p-8',
             'left-1/2 top-1/2 max-h-[90vh] max-w-[480px] -translate-x-1/2 -translate-y-1/2',
