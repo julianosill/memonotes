@@ -47,7 +47,10 @@ export function NoteForm({ note }: NoteFormProps) {
   }, [setIsSpeechRecognitionAPIAvailable])
 
   return (
-    <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-1 flex-col gap-4 lg:gap-8"
+      onSubmit={handleSubmit}
+    >
       <Input.Root className="flex flex-col gap-2">
         <Input.Label>Título</Input.Label>
         <Input.Wrapper>
@@ -70,7 +73,7 @@ export function NoteForm({ note }: NoteFormProps) {
             />
           )}
         </div>
-        <Input.Wrapper className="min-h-[240px] flex-1">
+        <Input.Wrapper className="min-h-[160px] flex-1">
           <Input.Textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
