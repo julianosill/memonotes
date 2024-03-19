@@ -1,5 +1,11 @@
+import { Metadata } from 'next'
+
 import { BackButton } from '@/components/back-button'
 import { NoteForm } from '@/components/note-form'
+
+export const metadata: Metadata = {
+  title: 'Adicionar nota',
+}
 
 export default function AddNote() {
   return (

@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     template: '%s | memonotes',
     default: 'memonotes',
   },
+  description:
+    'Aplicação web para gerenciamento de notas e transcrição de áudio em tempo real.',
 }
 
 export default function RootLayout({
