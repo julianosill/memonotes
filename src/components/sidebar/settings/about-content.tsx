@@ -1,6 +1,6 @@
 import { Dialog } from '@/components/dialog'
-import { ExternalLink } from '@/components/external-link'
 import { LogoMemonotes } from '@/components/logo/memonotes'
+import { TextLink } from '@/components/text-link'
 
 interface AboutContentProps {
   trigger: React.RefObject<HTMLButtonElement>
@@ -32,18 +32,15 @@ export function AboutContent({ trigger }: AboutContentProps) {
 
       <p className="mt-8 text-sm">
         Confira o repositório do projeto{' '}
-        <ExternalLink href="https://github.com/julianosill/memonotes">
+        <TextLink href="https://github.com/julianosill/memonotes">
           aqui
-        </ExternalLink>
+        </TextLink>
         .
       </p>
 
       <p className="mt-2 text-sm">
         Desenvolvido por{' '}
-        <ExternalLink href="https://github.com/julianosill">
-          Juliano Sill
-        </ExternalLink>
-        .
+        <TextLink href="https://github.com/julianosill">Juliano Sill</TextLink>.
       </p>
     </Dialog.Content>
   )

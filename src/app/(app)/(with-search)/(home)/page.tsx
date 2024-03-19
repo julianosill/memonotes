@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 import { useStore } from '@/app/store'
 import emptyImage from '@/assets/empty.png'
-import { ExternalLink } from '@/components/external-link'
 import { NoteList } from '@/components/note/note-list'
+import { TextLink } from '@/components/text-link'
 
 export default function Home() {
   const { notes } = useStore((store) => {
@@ -23,8 +23,7 @@ export default function Home() {
           </p>
           <p className="text-sm">
             Adicione sua primera nota{' '}
-            <ExternalLink href="/add">clicando aqui</ExternalLink>. ou no botão
-            ao lado.
+            <TextLink href="/add">clicando aqui</TextLink>. ou no botão ao lado.
           </p>
           <Image
             src={emptyImage}

@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react'
 import { INote, useStore } from '@/app/store'
 import emptyImage from '@/assets/empty.png'
 import { BackButton } from '@/components/back-button'
-import { ExternalLink } from '@/components/external-link'
 import { NoteList } from '@/components/note/note-list'
+import { TextLink } from '@/components/text-link'
 
 interface SearchProps {
   searchParams: {
@@ -63,7 +63,7 @@ export default function Search({ searchParams }: SearchProps) {
           </p>
           <p className="text-sm">
             Faça uma nova busca ou acesse a{' '}
-            <ExternalLink href="/">página inicial</ExternalLink>.
+            <TextLink href="/">página inicial</TextLink>.
           </p>
           <Image
             src={emptyImage}

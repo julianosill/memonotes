@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type ExternalLinkProps = ComponentProps<'a'>
+type TextLinkProps = ComponentProps<'a'>
 
-export function ExternalLink({ href, className, ...props }: ExternalLinkProps) {
+export function TextLink({ href, className, ...props }: TextLinkProps) {
   return (
     <a
       href={href}

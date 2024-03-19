@@ -1,7 +1,12 @@
+import { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import notFoundImage from '@/assets/404-not-found.png'
+import { TextLink } from '@/components/text-link'
+
+export const metadata: Metadata = {
+  title: 'Erro 404',
+}
 
 export default function NotFound() {
   return (
@@ -14,12 +19,7 @@ export default function NotFound() {
         A página que você está tentando acessar não foi encontrada ou foi
         digerida pelo elemento abaixo.
       </p>
-      <Link
-        href="/"
-        className="font-medium text-strong underline underline-offset-2 hover:text-accent-foreground"
-      >
-        Acessar a página inicial
-      </Link>
+      <TextLink href="/">Acessar a página inicial</TextLink>
 
       <Image
         src={notFoundImage}

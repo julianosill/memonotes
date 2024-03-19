@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 
 import { Dialog } from '@/components/dialog'
 import { Popover } from '@/components/popover'
+import { TextLink } from '@/components/text-link'
 import { Tooltip } from '@/components/tooltip'
 
 import { Input } from '../../input'
@@ -89,12 +90,9 @@ export function SpeechToTextDialog({
               <p className="text-sm">
                 Alguns navegadores não são compatíveis com o reconhecimento de
                 voz. Confira através{' '}
-                <Link
-                  className="font-medium text-strong underline underline-offset-2 hover:text-accent-foreground"
-                  href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility"
-                >
+                <TextLink href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility">
                   deste link
-                </Link>
+                </TextLink>
                 .
               </p>
             </Popover.Content>
