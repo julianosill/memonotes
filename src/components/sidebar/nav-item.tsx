@@ -17,7 +17,7 @@ export function NavItem({ icon: Icon, children, ...props }: NavItemProps) {
   return (
     <Link
       className={twMerge(
-        'group flex items-center gap-3 py-2 font-medium',
+        'group flex items-center gap-3 py-2 text-lg font-medium md:text-base',
         'text-zinc-200 hover:text-white',
         'dark:text-zinc-300 dark:hover:text-white',
         props.className,
@@ -28,7 +28,7 @@ export function NavItem({ icon: Icon, children, ...props }: NavItemProps) {
         <Icon.type
           {...Icon.props}
           className={twMerge(
-            'size-5 group-hover:text-white',
+            'size-6 group-hover:text-white md:size-5',
             isActive
               ? 'text-memonotes-200 dark:text-memonotes-300'
               : 'text-memonotes-400 dark:text-memonotes-600',

@@ -28,14 +28,14 @@ export function Settings() {
         <DropdownMenu.Trigger asChild ref={dropdownTriggerRef}>
           <Button
             className={twMerge(
-              'group h-fit p-2',
+              'group h-fit w-fit p-2',
               'bg-memonotes-500 text-memonotes-200',
               'hover:bg-memonotes-700 hover:text-memonotes-100',
               'dark:bg-memonotes-800 dark:text-memonotes-400 dark:hover:bg-memonotes-950',
             )}
             aria-label="Configurações"
           >
-            <SettingsIcon className="size-5 group-hover:animate-revolve" />
+            <SettingsIcon className="size-6 group-hover:animate-revolve md:size-5" />
           </Button>
         </DropdownMenu.Trigger>
 
@@ -44,7 +44,7 @@ export function Settings() {
             align="start"
             sideOffset={4}
             side="top"
-            className="space-y-4 rounded-md bg-background p-6 shadow-lg ring-1 ring-border-soft"
+            className="z-10 space-y-4 rounded-md bg-background p-6 shadow-lg ring-1 ring-border-soft"
           >
             <DropdownMenu.Group className="space-y-1">
               <DropdownMenu.Label className="pb-1 text-sm font-semibold">
