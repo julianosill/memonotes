@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   },
   description:
     'Aplicação web para gerenciamento de notas e transcrição de áudio em tempo real.',
+  metadataBase: new URL('https://memonotes-js.vercel.app'),
 }
 
 export default function RootLayout({
