@@ -10,7 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        app: '16rem 1fr',
+        app: '14rem 1fr',
+        notes: '1fr',
+        'sm-notes': 'repeat(2, 1fr)',
+        'xl-notes': 'repeat(3, 1fr)',
+        '2xl-notes': 'repeat(4, 1fr)',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
