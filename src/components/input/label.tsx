@@ -14,7 +14,10 @@ export function Label(props: LabelProps) {
     <label
       htmlFor={id}
       {...props}
-      className={twMerge('font-medium text-muted-foreground', props.className)}
+      className={twMerge(
+        'text-sm font-medium text-muted-foreground lg:text-base',
+        props.className,
+      )}
     />
   )
 }

@@ -15,7 +15,7 @@ export function Textarea(props: TextareaProps) {
       id={id}
       {...props}
       className={twMerge(
-        'h-full min-h-full w-full bg-transparent text-foreground outline-none placeholder:text-muted-foreground',
+        'h-full min-h-full w-full bg-transparent text-foreground outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground placeholder:text-muted-foreground',
         props.className,
       )}
     />
