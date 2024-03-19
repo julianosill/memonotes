@@ -17,7 +17,7 @@ export function AboutContent({ trigger }: AboutContentProps) {
       onCloseAutoFocus={handleFocusOnDropdown}
       className="text-center md:h-fit md:max-w-[420px]"
     >
-      <Dialog.Title className="text-lg font-medium">Sobre</Dialog.Title>
+      <Dialog.Title>Sobre</Dialog.Title>
 
       <LogoMemonotes className="mx-auto mb-8 mt-12 h-fit w-full max-w-[220px] fill-primary" />
 
