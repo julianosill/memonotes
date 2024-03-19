@@ -52,13 +52,13 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
       </Tooltip.Root>
 
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="fixed inset-0 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
+        <AlertDialog.Overlay className="fixed inset-0 z-30 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
         <AlertDialog.Content
           onCloseAutoFocus={(e) => e.preventDefault()}
           className={twMerge(
-            'fixed flex w-full flex-col gap-4 overflow-y-auto bg-card p-8',
+            'fixed z-30 flex w-10/12 flex-col gap-4 overflow-y-auto bg-card p-8',
             'left-1/2 top-1/2 max-h-[90vh] max-w-[480px] -translate-x-1/2 -translate-y-1/2',
-            'md:rounded-xl md:border md:border-border-soft md:shadow-md',
+            'rounded-xl border border-border-soft shadow-md',
           )}
         >
           <AlertDialog.Title className="text-lg font-medium text-strong">
@@ -70,7 +70,7 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
               {title}
             </span>
           </AlertDialog.Description>
-          <section className="flex justify-end gap-4 pt-4">
+          <section className="flex flex-wrap justify-end gap-4 pt-4">
             <AlertDialog.Cancel asChild>
               <Button variant="muted">Cancelar</Button>
             </AlertDialog.Cancel>
