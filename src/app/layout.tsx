@@ -1,5 +1,7 @@
 import './globals.css'
 
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
@@ -38,6 +40,8 @@ export default function RootLayout({
           <Toaster richColors position="top-right" closeButton />
           {children}
         </ThemeColorProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
