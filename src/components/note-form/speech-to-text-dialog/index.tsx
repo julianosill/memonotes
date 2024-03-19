@@ -1,4 +1,3 @@
-import * as RadixDialog from '@radix-ui/react-dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import {
   CircleCheck,
@@ -7,7 +6,6 @@ import {
   Info,
   Mic,
   Paintbrush,
-  X,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -64,8 +62,7 @@ export function SpeechToTextDialog({
       </Dialog.Trigger>
 
       <Dialog.Content className="flex flex-col gap-8 md:h-[720px]">
-        <RadixDialog.Title className="flex gap-4 text-lg font-medium text-strong">
-          Transcreva sua gravação de voz
+        <Dialog.Title className="flex w-10/12 items-center gap-2">
           <Popover.Root>
             <Popover.Trigger asChild>
               <Button
@@ -102,13 +99,14 @@ export function SpeechToTextDialog({
               </p>
             </Popover.Content>
           </Popover.Root>
-        </RadixDialog.Title>
+          Transcreva sua gravação de voz
+        </Dialog.Title>
 
         <VisuallyHidden.Root>
-          <RadixDialog.Description>
+          <Dialog.Description>
             Inicie a gravação de voz e acompanhe abaixo a transcrição da sua
             fala em tempo real.
-          </RadixDialog.Description>
+          </Dialog.Description>
         </VisuallyHidden.Root>
 
         <section className="flex flex-1 flex-col gap-4">
@@ -126,13 +124,13 @@ export function SpeechToTextDialog({
             </Input.Wrapper>
           </Input.Root>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 sm:flex-nowrap">
             {isClipboardSupported && (
               <Button
                 type="button"
                 size="sm"
                 variant="secondary"
-                className="w-full whitespace-nowrap"
+                className="flex-1 whitespace-nowrap"
                 disabled={isActionsDisabled}
                 onClick={clipToClipboard}
               >
@@ -147,7 +145,7 @@ export function SpeechToTextDialog({
                   type="button"
                   size="sm"
                   variant="secondary"
-                  className="w-full whitespace-nowrap"
+                  className="flex-1 whitespace-nowrap"
                   disabled={isActionsDisabled}
                   onClick={handleAddTranscriptionToNote}
                 >
@@ -170,7 +168,7 @@ export function SpeechToTextDialog({
                   type="button"
                   size="sm"
                   variant="secondary"
-                  className="w-full whitespace-nowrap"
+                  className="flex-1 whitespace-nowrap"
                   disabled={isActionsDisabled}
                 >
                   <Paintbrush className="size-4" />
@@ -219,17 +217,6 @@ export function SpeechToTextDialog({
             Cancelar
           </Button>
         </section>
-
-        <RadixDialog.Close asChild>
-          <Button
-            size="sm"
-            variant="ghost"
-            className="absolute right-8 top-8 size-8 p-0 text-muted-foreground sm:right-4 sm:top-4"
-          >
-            <X className="size-6 sm:size-5" />
-            <span className="sr-only">Fechar</span>
-          </Button>
-        </RadixDialog.Close>
       </Dialog.Content>
     </Dialog.Root>
   )
