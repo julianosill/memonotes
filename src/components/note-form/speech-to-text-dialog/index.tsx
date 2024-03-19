@@ -7,7 +7,6 @@ import {
   Mic,
   Paintbrush,
 } from 'lucide-react'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { Dialog } from '@/components/dialog'
