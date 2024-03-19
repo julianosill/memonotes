@@ -21,10 +21,10 @@ export function AddNoteButton({ to, onNavigation }: AddNoteButtonProps) {
   return (
     <Button
       onClick={handleNavigation}
-      className="group h-12 w-full whitespace-nowrap bg-memonotes-500 text-base dark:bg-memonotes-800 dark:hover:bg-memonotes-700 dark:hover:text-white md:h-10 md:text-sm"
+      className="group h-12 w-full justify-start whitespace-nowrap bg-memonotes-500 text-base dark:bg-memonotes-800 dark:hover:bg-memonotes-700 dark:hover:text-white md:h-10 md:text-sm"
     >
       <CirclePlus className="size-5 text-memonotes-300 transition-colors group-hover:text-primary dark:group-hover:text-white md:size-4" />
-      Adicionar nota
+      Nova nota
     </Button>
   )
 }
