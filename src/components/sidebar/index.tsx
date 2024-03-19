@@ -26,7 +26,7 @@ export function Sidebar() {
       className={twMerge(
         'flex flex-col bg-memonotes-600 dark:bg-memonotes-900',
         'fixed left-0 top-0 z-10 w-full overflow-y-auto px-6 py-1 data-[state=open]:bottom-0',
-        'md:bottom-12 md:left-12 md:top-12 md:w-[16rem] md:rounded-2xl md:p-10 md:data-[state=open]:bottom-12',
+        'md:bottom-12 md:left-12 md:top-12 md:w-[14rem] md:rounded-2xl md:p-10 md:data-[state=open]:bottom-12',
         'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-400 dark:scrollbar-thumb-memonotes-600',
       )}
     >

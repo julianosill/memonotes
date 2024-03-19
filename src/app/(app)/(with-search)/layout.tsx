@@ -8,9 +8,9 @@ export default function PageWithSearchLayout({
   children: ReactNode
 }) {
   return (
-    <div className="flex flex-1 flex-col gap-8">
-      <SearchForm />
+    <>
+      <SearchForm className="mb-4 md:mb-6 lg:mb-8" />
       {children}
-    </div>
+    </>
   )
 }

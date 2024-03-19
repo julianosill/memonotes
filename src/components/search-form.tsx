@@ -2,10 +2,12 @@
 
 import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { FormEvent } from 'react'
+import { ComponentProps, FormEvent } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export function SearchForm() {
+type SearchFormProps = ComponentProps<'form'>
+
+export function SearchForm({ className, ...props }: SearchFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -27,10 +29,12 @@ export function SearchForm() {
     <form
       onSubmit={handleSearch}
       className={twMerge(
-        'group relative flex w-full max-w-64 items-center gap-4 border-b-2 py-2',
+        'group relative flex w-64 items-center gap-4 border-b-2 py-2 max-md:w-full',
         'border-transparent text-muted-foreground',
         'transition-colors focus-within:border-border focus-within:text-foreground',
+        className,
       )}
+      {...props}
     >
       <label htmlFor="search" className="sr-only">
         Pesquisar

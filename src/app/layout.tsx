@@ -25,8 +25,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
-      <body className="antialiased transition-colors">
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-500`}
+      suppressHydrationWarning
+    >
+      <body className="antialiased transition-colors ">
         <ThemeColorProvider>
           <Toaster richColors position="top-right" closeButton />
           {children}
