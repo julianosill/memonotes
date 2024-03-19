@@ -2,7 +2,7 @@
 
 # Memonotes
 
-Está é uma aplicação web para gerenciar notas de texto, incluindo a função de transcrição em tempo real (speech-to-text) através do uso da `Speech Recognition Web API`. Foi desenvolvida em Next para fins de estudos e exercícios práticos no desenvolvimento front-end, implementando recursos de acessibilidade, usabilidade e boas aplicações de UI e UX design.
+Memonotes é uma aplicação web para gerenciar notas de texto, incluindo a função de transcrição em tempo real (speech-to-text) através do uso da `Speech Recognition Web API`. Foi desenvolvida em Next para fins de estudos e exercícios práticos no desenvolvimento front-end, implementando recursos de acessibilidade, usabilidade e boas aplicações de UI e UX design.
 
 ## Tecnologias utilizadas
 
