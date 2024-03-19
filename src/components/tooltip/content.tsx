@@ -12,7 +12,7 @@ export function Content({ children, className, ...props }: ContentProps) {
       <RadixTooltip.Content
         sideOffset={4}
         className={twMerge(
-          'rounded-md bg-background px-3 py-2 text-sm shadow-lg ring-1 ring-border-soft',
+          'z-20 rounded-md bg-background px-3 py-2 text-sm shadow-lg ring-1 ring-border-soft',
           className,
         )}
         {...props}

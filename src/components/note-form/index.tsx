@@ -97,7 +97,7 @@ export function NoteForm({ note }: NoteFormProps) {
                 <span className="sr-only">Excluir nota</span>
               </Button>
             </Popover.Trigger>
-            <Popover.Content className="flex flex-col gap-3">
+            <Popover.Content className="flex max-w-[320px] flex-col gap-3">
               <div className="font-semibold">Observações</div>
               <ul className="list-disc space-y-1 pl-4">
                 <li>Adicione tags separadas por espaço;</li>

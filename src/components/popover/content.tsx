@@ -13,10 +13,11 @@ export function Content({ children, className, ...props }: ContentProps) {
   return (
     <RadixPopover.Portal>
       <RadixPopover.Content
+        collisionPadding={16}
         sideOffset={4}
         side="top"
         className={twMerge(
-          'rounded-md bg-background p-4 text-sm shadow-lg ring-1 ring-border-soft',
+          'z-20 w-[calc(100vw-36px)] rounded-md bg-background p-4 text-sm shadow-lg ring-1 ring-border-soft',
           className,
         )}
         {...props}
