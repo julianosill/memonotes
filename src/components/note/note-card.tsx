@@ -2,11 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { INote } from '@/app/store'
+import { DeleteNote } from '@/components/delete-note'
+import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
 import { getExcerpt } from '@/utils/get-excerpt'
-
-import { DeleteNote } from './delete-note'
-import { Button } from './ui/button'
 
 interface NoteCardProps {
   note: INote
@@ -16,8 +15,8 @@ export function NoteCard({ note }: NoteCardProps) {
   const router = useRouter()
 
   return (
-    <div className="group relative flex flex-col rounded-xl border border-transparent bg-card p-8 shadow transition-shadow hover:shadow-md dark:border-border-soft">
-      <div className="absolute right-3 top-3 opacity-0 transition-all group-hover:opacity-100">
+    <article className="group relative flex w-full flex-col rounded-xl border border-transparent bg-card p-5 shadow transition-shadow hover:shadow-md dark:border-border-soft lg:p-8">
+      <div className="absolute right-3 top-3 transition-all group-hover:opacity-100 md:opacity-0">
         <DeleteNote id={note.id} title={note.title} size="sm" />
       </div>
 
@@ -26,7 +25,7 @@ export function NoteCard({ note }: NoteCardProps) {
       </span>
 
       <Link href={`/note/${note.id}`} className="flex-1">
-        <h2 className="py-4 text-lg font-semibold text-strong transition-colors hover:text-primary">
+        <h2 className="pb-2 pt-3 text-base font-semibold leading-snug text-strong transition-colors hover:text-primary lg:py-4 lg:text-lg">
           {note.title}
         </h2>
         <p className="text-sm leading-relaxed text-card-foreground">
@@ -35,7 +34,7 @@ export function NoteCard({ note }: NoteCardProps) {
       </Link>
 
       {note.tags.length > 0 && (
-        <section className="mt-6 flex flex-wrap gap-3">
+        <section className="mt-4 flex flex-wrap gap-2 lg:mt-6 lg:gap-3">
           {note.tags.map((tag) => {
             return (
               <Button
@@ -50,6 +49,6 @@ export function NoteCard({ note }: NoteCardProps) {
           })}
         </section>
       )}
-    </div>
+    </article>
   )
 }
