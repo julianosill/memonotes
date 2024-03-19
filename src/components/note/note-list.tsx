@@ -8,7 +8,7 @@ interface NoteListProps {
 
 export function NoteList({ notes }: NoteListProps) {
   return (
-    <section className="grid-cols-notes sm:grid-cols-sm-notes xl:grid-cols-xl-notes 2xl:grid-cols-2xl-notes grid gap-4 lg:gap-6">
+    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6 xl:grid-cols-3 2xl:grid-cols-4">
       {notes.map((note) => (
         <NoteCard key={note.id} note={note} />
       ))}
