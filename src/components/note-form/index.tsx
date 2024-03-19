@@ -1,9 +1,8 @@
 'use client'
 
 import { CircleCheck, Info, LoaderCircle } from 'lucide-react'
+import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
-
-import { INote } from '@/app/store'
 
 import { Input } from '../input'
 import { Popover } from '../popover'
@@ -12,10 +11,10 @@ import { SpeechToTextDialog } from './speech-to-text-dialog'
 import { useNoteForm } from './useNoteForm'
 
 interface NoteFormProps {
-  note?: INote
+  noteId?: string
 }
 
-export function NoteForm({ note }: NoteFormProps) {
+export function NoteForm({ noteId }: NoteFormProps) {
   const {
     title,
     setTitle,
@@ -23,6 +22,7 @@ export function NoteForm({ note }: NoteFormProps) {
     setContent,
     tagsInString,
     setTagsInString,
+    getNote,
     isSpeechRecognitionAPIAvailable,
     setIsSpeechRecognitionAPIAvailable,
     addTranscriptionToNote,
@@ -30,15 +30,21 @@ export function NoteForm({ note }: NoteFormProps) {
     handleSubmit,
     isPending,
     handleCancel,
-  } = useNoteForm({ note })
+  } = useNoteForm({ noteId })
 
   useEffect(() => {
-    if (note) {
-      setTitle(note.title)
-      setContent(note.content)
-      if (note.tags) setTagsInString(note.tags.join(' '))
+    if (noteId) {
+      const data = getNote(noteId)
+
+      if (data) {
+        setTitle(data.title)
+        setContent(data.content)
+        if (data.tags) setTagsInString(data.tags.join(' '))
+      } else {
+        redirect('/')
+      }
     }
-  }, [note, setTitle, setContent, setTagsInString])
+  }, [getNote, noteId, setContent, setTagsInString, setTitle])
 
   useEffect(() => {
     setIsSpeechRecognitionAPIAvailable(

@@ -5,24 +5,28 @@ import { toast } from 'sonner'
 import { INote, useStore } from '@/app/store'
 
 interface UseNoteFormProps {
-  note?: INote
+  noteId?: string
 }
 
-export function useNoteForm({ note }: UseNoteFormProps) {
+export function useNoteForm({ noteId }: UseNoteFormProps) {
+  const [note, setNote] = useState<INote | null>(null)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [tagsInString, setTagsInString] = useState('')
   const [isSpeechRecognitionAPIAvailable, setIsSpeechRecognitionAPIAvailable] =
     useState(false)
   const router = useRouter()
-  const { isPending, addNote, updateNote, fetchNotes } = useStore((store) => {
-    return {
-      isPending: store.isPending,
-      addNote: store.addNote,
-      updateNote: store.updateNote,
-      fetchNotes: store.fetchNotes,
-    }
-  })
+  const { isPending, addNote, updateNote, fetchNotes, getNote } = useStore(
+    (store) => {
+      return {
+        isPending: store.isPending,
+        addNote: store.addNote,
+        updateNote: store.updateNote,
+        fetchNotes: store.fetchNotes,
+        getNote: store.getNote,
+      }
+    },
+  )
 
   const isSubmitDisabled = !title.trim() || !content.trim()
 
@@ -51,9 +55,9 @@ export function useNoteForm({ note }: UseNoteFormProps) {
       }
     }
 
-    note
+    noteId
       ? await updateNote({
-          id: note.id,
+          id: noteId,
           title: title.trim(),
           content: content.trim(),
           tags,
@@ -88,12 +92,15 @@ export function useNoteForm({ note }: UseNoteFormProps) {
   }
 
   return {
+    note,
+    setNote,
     title,
     setTitle,
     content,
     setContent,
     tagsInString,
     setTagsInString,
+    getNote,
     isSpeechRecognitionAPIAvailable,
     setIsSpeechRecognitionAPIAvailable,
     addTranscriptionToNote,
