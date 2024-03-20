@@ -61,7 +61,7 @@ export function SpeechToTextDialog({
         </Button>
       </Dialog.Trigger>
 
-      <Dialog.Content className="flex flex-col gap-8 md:h-[720px]">
+      <Dialog.Content className="flex flex-col gap-8 max-md:pb-16 md:h-[720px]">
         <Dialog.Title className="flex w-10/12 items-center gap-2">
           <Popover.Root>
             <Popover.Trigger asChild>
