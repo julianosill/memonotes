@@ -35,7 +35,7 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
   if (!note) return null
 
   return (
-    <main className="flex flex-1 flex-col rounded-2xl bg-card p-12 shadow-md dark:border dark:border-border-soft">
+    <main className="flex flex-1 flex-col rounded-2xl bg-card p-8 shadow-md dark:border dark:border-border-soft md:p-12">
       <div className="flex items-start justify-between">
         <BackButton />
 
