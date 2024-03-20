@@ -34,15 +34,15 @@ export function Sidebar() {
         <Link href="/">
           <LogoMemonotes className="h-fit w-full max-w-[112px] fill-primary-foreground hover:fill-white md:max-w-full" />
         </Link>
-        <Collapsible.Trigger className="md:hidden">
+        <Collapsible.Trigger className="text-white md:hidden">
           {open ? (
             <>
-              <X className="size-6 text-accent-foreground" />
+              <X className="size-6" />
               <span className="sr-only">Fechar menu</span>
             </>
           ) : (
             <>
-              <Menu className="size-6 text-accent-foreground" />
+              <Menu className="size-6" />
               <span className="sr-only">Abrir menu</span>
             </>
           )}
