@@ -47,12 +47,12 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
 
       <h2 className="py-8 text-2xl font-semibold text-strong">{note.title}</h2>
 
-      <div className="leading-relaxed text-card-foreground">
+      <div className="flex-1 leading-relaxed text-card-foreground">
         <ParsedContent text={note.content} />
       </div>
 
-      <footer className="mt-12 flex gap-12 border-t border-border-soft pt-6">
-        <div className="flex flex-col gap-4 text-sm text-muted-foreground">
+      <footer className="mt-12 flex gap-6 border-t border-border-soft pt-6 max-lg:flex-col lg:gap-12">
+        <div className="flex flex-col gap-4 text-sm text-muted-foreground max-lg:order-2">
           {note.updatedAt && (
             <div>
               <h3 className="mb-1 font-medium">Atualizada em</h3>
@@ -71,7 +71,7 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
           </div>
         </div>
         {note.tags.length > 0 && (
-          <div className="flex flex-1 flex-col gap-3 text-sm">
+          <div className="flex flex-1 flex-col gap-3 text-sm max-lg:order-1">
             <h3 className="font-medium text-muted-foreground">Tags</h3>
             <div className="flex flex-wrap gap-3">
               {note.tags.map((tag) => {
