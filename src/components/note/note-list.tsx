@@ -9,7 +9,7 @@ interface NoteListProps {
 }
 
 export function NoteList({ notes }: NoteListProps) {
-  const [parent] = useAutoAnimate()
+  const [parent] = useAutoAnimate({ duration: 300, easing: 'ease-in-out' })
 
   return (
     <section
