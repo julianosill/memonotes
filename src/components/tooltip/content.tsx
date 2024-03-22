@@ -34,7 +34,7 @@ export const Content = forwardRef(
               ref={forwardedRef}
               sideOffset={4}
               className={twMerge(
-                'z-20 rounded-md bg-background px-3 py-2 text-sm shadow-lg ring-1 ring-border-soft',
+                'z-30 rounded-md bg-background px-3 py-2 text-sm shadow-lg ring-1 ring-border-soft',
                 className,
               )}
               {...props}
