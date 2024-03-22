@@ -1,7 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
 
-type DescriptionProps = Dialog.DialogDescriptionProps
-
-export function Description(props: DescriptionProps) {
+export function Description(props: Dialog.DialogDescriptionProps) {
   return <Dialog.Description {...props} />
 }

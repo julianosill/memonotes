@@ -1,12 +1,12 @@
-import * as Dialog from '@radix-ui/react-dialog'
+import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { ForwardedRef, forwardRef } from 'react'
 
 export const Trigger = forwardRef(
   (
-    props: Dialog.DialogTriggerProps,
+    props: AlertDialog.AlertDialogTriggerProps,
     forwardedRef: ForwardedRef<HTMLButtonElement>,
   ) => {
-    return <Dialog.Trigger ref={forwardedRef} {...props} />
+    return <AlertDialog.Trigger ref={forwardedRef} {...props} />
   },
 )
 

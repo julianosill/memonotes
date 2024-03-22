@@ -37,7 +37,7 @@ export default function RootLayout({
     >
       <body className="antialiased transition-colors ">
         <ThemeColorProvider>
-          <Toaster richColors position="top-right" closeButton />
+          <Toaster richColors position="top-right" />
           {children}
         </ThemeColorProvider>
         <Analytics />

@@ -24,10 +24,10 @@ export function Sidebar() {
       open={open}
       onOpenChange={setOpen}
       className={twMerge(
-        'flex flex-col bg-memonotes-600 dark:bg-memonotes-900',
-        'fixed left-0 top-0 z-10 w-full overflow-y-auto px-6 py-1 data-[state=open]:bottom-0',
-        'md:bottom-12 md:left-12 md:top-12 md:w-[14rem] md:rounded-2xl md:p-10 md:data-[state=open]:bottom-12',
-        'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-400 dark:scrollbar-thumb-memonotes-600',
+        'bg-memonotes-600 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-400 dark:bg-memonotes-900 dark:scrollbar-thumb-memonotes-600',
+        'fixed z-10 flex flex-col overflow-y-auto transition-all duration-300 ease-out',
+        'inset-0 h-12 w-full px-6 data-[state=open]:h-screen',
+        'md:inset-auto md:w-[14rem] md:rounded-2xl md:p-10 md:data-[state=closed]:h-[calc(100vh-96px)] md:data-[state=open]:h-[calc(100vh-96px)]',
       )}
     >
       <div className="flex items-center justify-between py-3">

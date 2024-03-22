@@ -1,19 +1,16 @@
-import * as Dialog from '@radix-ui/react-dialog'
+import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
 import { ForwardedRef, forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { Button } from '@/components/ui/button'
-
-import { useDialog } from './root'
+import { useAlertDialog } from './root'
 
 export const Content = forwardRef(
   (
-    { children, className, ...props }: Dialog.DialogContentProps,
+    { children, className, ...props }: AlertDialog.AlertDialogContentProps,
     forwardedRef: ForwardedRef<HTMLDivElement>,
   ) => {
-    const isOpen = useDialog()
+    const isOpen = useAlertDialog()
 
     const overlayVariants = {
       closed: { opacity: 0 },
@@ -37,9 +34,9 @@ export const Content = forwardRef(
     return (
       <AnimatePresence>
         {isOpen && (
-          <Dialog.Portal forceMount>
-            <Dialog.Overlay
-              className="fixed inset-0 z-20 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90"
+          <AlertDialog.Portal forceMount>
+            <AlertDialog.Overlay
+              className="fixed inset-0 z-30 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90"
               asChild
             >
               <motion.div
@@ -48,15 +45,15 @@ export const Content = forwardRef(
                 animate="open"
                 exit="closed"
               />
-            </Dialog.Overlay>
-            <Dialog.Content
+            </AlertDialog.Overlay>
+
+            <AlertDialog.Content
               forceMount
               ref={forwardedRef}
               className={twMerge(
-                'fixed inset-0 z-20 m-auto flex h-screen w-full max-w-[768px] flex-col overflow-y-auto bg-card px-8 py-12 sm:p-12 md:justify-center',
-                'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground',
-                'md:max-h-[80vh] md:w-10/12',
-                'md:rounded-xl md:border md:border-border-soft md:shadow-md',
+                'fixed inset-0 z-30 m-auto h-fit max-h-[80vh] w-fit overflow-y-auto p-8',
+                'rounded-xl border border-border-soft bg-card shadow-md',
+                '',
                 className,
               )}
               asChild
@@ -69,19 +66,9 @@ export const Content = forwardRef(
                 exit="closed"
               >
                 {children}
-                <Dialog.Close asChild>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="absolute right-6 top-6 size-8 p-0 text-muted-foreground md:right-4 md:top-4"
-                  >
-                    <X className="size-6 sm:size-5" />
-                    <span className="sr-only">Fechar</span>
-                  </Button>
-                </Dialog.Close>
               </motion.div>
-            </Dialog.Content>
-          </Dialog.Portal>
+            </AlertDialog.Content>
+          </AlertDialog.Portal>
         )}
       </AnimatePresence>
     )

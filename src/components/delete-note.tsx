@@ -1,18 +1,17 @@
-import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { Loader2, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { twMerge } from 'tailwind-merge'
 
 import { useStore } from '@/app/store'
 
+import { AlertDialog } from './alert-dialog'
 import { Tooltip } from './tooltip'
 import { Button } from './ui/button'
 
 interface DeleteNoteProps {
   id: string
   title: string
-  size?: 'sm' | 'base'
+  size?: 'base' | 'sm'
 }
 
 export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
@@ -51,49 +50,39 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
         <Tooltip.Content>Excluir nota</Tooltip.Content>
       </Tooltip.Root>
 
-      <AlertDialog.Portal>
-        <AlertDialog.Overlay className="fixed inset-0 z-30 bg-memonotes-950/90 backdrop-blur-sm dark:bg-zinc-950/90" />
-        <AlertDialog.Content
-          onCloseAutoFocus={(e) => e.preventDefault()}
-          className={twMerge(
-            'fixed z-30 flex w-10/12 flex-col gap-4 overflow-y-auto bg-card p-8',
-            'left-1/2 top-1/2 max-h-[90vh] max-w-[480px] -translate-x-1/2 -translate-y-1/2',
-            'rounded-xl border border-border-soft shadow-md',
-          )}
-        >
-          <AlertDialog.Title className="text-lg font-medium text-strong">
-            Excluir nota
-          </AlertDialog.Title>
-          <AlertDialog.Description className="flex flex-col gap-2">
-            Tem certeza que deseja excluir esta nota?
-            <span className="rounded border border-border-soft bg-muted px-2 py-1.5 font-mono text-xs">
-              {title}
-            </span>
-          </AlertDialog.Description>
-          <section className="flex flex-wrap justify-end gap-4 pt-4">
-            <AlertDialog.Cancel asChild>
-              <Button variant="muted">Cancelar</Button>
-            </AlertDialog.Cancel>
-            <Button
-              onClick={handleDeleteNote}
-              variant="destructive"
-              disabled={isPending}
-            >
-              {isPending ? (
-                <>
-                  <Loader2 className="size-5 animate-spin" />
-                  Excluindo nota...
-                </>
-              ) : (
-                <>
-                  <Trash2 className="size-5" />
-                  Excluir
-                </>
-              )}
-            </Button>
-          </section>
-        </AlertDialog.Content>
-      </AlertDialog.Portal>
+      <AlertDialog.Content className="flex w-10/12 max-w-[480px] flex-col gap-4">
+        <AlertDialog.Title>Excluir nota</AlertDialog.Title>
+
+        <AlertDialog.Description className="flex flex-col gap-2">
+          Tem certeza que deseja excluir esta nota?
+          <span className="rounded border border-border-soft bg-muted px-2 py-1.5 font-mono text-xs">
+            {title}
+          </span>
+        </AlertDialog.Description>
+
+        <section className="flex flex-wrap justify-end gap-4 pt-4">
+          <AlertDialog.Cancel asChild>
+            <Button variant="muted">Cancelar</Button>
+          </AlertDialog.Cancel>
+          <Button
+            onClick={handleDeleteNote}
+            variant="destructive"
+            disabled={isPending}
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="size-5 animate-spin" />
+                Excluindo nota...
+              </>
+            ) : (
+              <>
+                <Trash2 className="size-5" />
+                Excluir
+              </>
+            )}
+          </Button>
+        </section>
+      </AlertDialog.Content>
     </AlertDialog.Root>
   )
 }
