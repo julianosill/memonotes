@@ -57,7 +57,7 @@ export const useStore = create<INotesStore>((set, get) => {
         })
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 250))
+      await new Promise((resolve) => setTimeout(resolve, 200))
 
       set({ notes, isLoading: false })
     },
@@ -85,7 +85,7 @@ export const useStore = create<INotesStore>((set, get) => {
         createdAt: new Date(),
       })
 
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 200))
 
       localStorage.setItem('@memonotes:notes', JSON.stringify(currentNotes))
       set({ notes: currentNotes, isPending: false })
@@ -111,7 +111,7 @@ export const useStore = create<INotesStore>((set, get) => {
         updatedAt: new Date(),
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 200))
 
       localStorage.setItem('@memonotes:notes', JSON.stringify(notes))
       set({ notes, isPending: false })
@@ -128,7 +128,7 @@ export const useStore = create<INotesStore>((set, get) => {
         throw new Error('Note not found.')
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 200))
 
       notes.splice(noteIndex, 1)
       localStorage.setItem('@memonotes:notes', JSON.stringify(notes))

@@ -1,6 +1,5 @@
 'use client'
 
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import {
   Info,
   Moon,
@@ -13,6 +12,7 @@ import { useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { Dialog } from '@/components/dialog'
+import { DropdownMenu } from '@/components/dropdown-menu'
 
 import { Button } from '../../ui/button'
 import { AboutContent } from './about-content'
@@ -39,47 +39,38 @@ export function Settings() {
           </Button>
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content
-            align="start"
-            sideOffset={4}
-            side="top"
-            className="z-10 space-y-4 rounded-md bg-background p-6 shadow-lg ring-1 ring-border-soft"
-          >
-            <DropdownMenu.Group className="space-y-1">
-              <DropdownMenu.Label className="pb-1 text-sm font-semibold">
-                Alterar tema
-              </DropdownMenu.Label>
+        <DropdownMenu.Content>
+          <DropdownMenu.Group>
+            <DropdownMenu.Label>Alterar tema</DropdownMenu.Label>
 
-              {theme !== 'light' && (
-                <SettingsItem onClick={() => setTheme('light')}>
-                  <Sun className="size-4" /> Claro
-                </SettingsItem>
-              )}
-
-              {theme !== 'dark' && (
-                <SettingsItem onClick={() => setTheme('dark')}>
-                  <Moon className="size-4" /> Escuro
-                </SettingsItem>
-              )}
-
-              <SettingsItem
-                onClick={() => setTheme('system')}
-                disabled={theme === 'system'}
-              >
-                <SunMoon className="size-4" /> Sistema
+            {theme !== 'light' && (
+              <SettingsItem onClick={() => setTheme('light')}>
+                <Sun className="size-4" /> Claro
               </SettingsItem>
-            </DropdownMenu.Group>
+            )}
 
-            <DropdownMenu.Separator className="h-px bg-border-soft" />
-
-            <Dialog.Trigger asChild>
-              <SettingsItem>
-                <Info className="size-4" /> Sobre
+            {theme !== 'dark' && (
+              <SettingsItem onClick={() => setTheme('dark')}>
+                <Moon className="size-4" /> Escuro
               </SettingsItem>
-            </Dialog.Trigger>
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
+            )}
+
+            <SettingsItem
+              onClick={() => setTheme('system')}
+              disabled={theme === 'system'}
+            >
+              <SunMoon className="size-4" /> Sistema
+            </SettingsItem>
+          </DropdownMenu.Group>
+
+          <DropdownMenu.Separator className="h-px bg-border-soft" />
+
+          <Dialog.Trigger asChild>
+            <SettingsItem>
+              <Info className="size-4" /> Sobre
+            </SettingsItem>
+          </Dialog.Trigger>
+        </DropdownMenu.Content>
       </DropdownMenu.Root>
 
       <AboutContent trigger={dropdownTriggerRef} />
