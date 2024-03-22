@@ -1,13 +1,5 @@
-import * as RadixTooltip from '@radix-ui/react-tooltip'
-import { ReactNode } from 'react'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
-interface TriggerProps {
-  children: ReactNode
-  asChild?: boolean
-}
-
-export function Trigger({ asChild, children }: TriggerProps) {
-  return (
-    <RadixTooltip.Trigger asChild={asChild}>{children}</RadixTooltip.Trigger>
-  )
+export function Trigger(props: Tooltip.TooltipTriggerProps) {
+  return <Tooltip.Trigger {...props} />
 }

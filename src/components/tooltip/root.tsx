@@ -1,14 +1,9 @@
-import * as RadixTooltip from '@radix-ui/react-tooltip'
-import { ReactNode } from 'react'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
-interface TooltipProps {
-  children: ReactNode
-}
-
-export function Root({ children }: TooltipProps) {
+export function Root({ children }: Tooltip.TooltipProps) {
   return (
-    <RadixTooltip.Provider delayDuration={400}>
-      <RadixTooltip.Root>{children}</RadixTooltip.Root>
-    </RadixTooltip.Provider>
+    <Tooltip.Provider delayDuration={400}>
+      <Tooltip.Root>{children}</Tooltip.Root>
+    </Tooltip.Provider>
   )
 }

@@ -15,7 +15,7 @@ export function NoteCard({ note }: NoteCardProps) {
   const router = useRouter()
 
   return (
-    <article className="group relative flex w-full flex-col rounded-xl border border-transparent bg-card p-5 shadow transition-shadow hover:shadow-md dark:border-border-soft lg:p-8">
+    <article className="group relative flex w-full flex-col rounded-xl border border-transparent bg-card p-5 shadow transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md dark:border-border-soft lg:p-8">
       <div className="absolute right-3 top-3 transition-all group-hover:opacity-100 md:opacity-0">
         <DeleteNote id={note.id} title={note.title} size="sm" />
       </div>
