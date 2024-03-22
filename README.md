@@ -24,6 +24,8 @@ Memonotes é uma aplicação web para gerenciar notas de texto, incluindo a fun�
 - Navegação funcional por teclado e mouse;
 - Temas claro e escuro.
 
+![Tela inicial da aplicação](readme/1-animation.gif)
+
 ## Instalação e execução local
 
 Clone este repositório, em seguida, acesse a pasta do projeto e instale as dependendências necessárias seguindo os comandos abaixo:
@@ -50,9 +52,9 @@ A aplicação estará disponível através do endereço informado no seu termina
 
 ## Próximas etapas
 
-- [ ] Incluir animações melhorar a experiência do usuário
-- [ ] Realizar integração com banco de dados
-- [ ] Adicionar cadastro de usuários, área de login e autenticação
+- [x] Incluir animações para melhorar a experiência do usuário
+- [ ] Realizar integração com banco de dados (Firebase)
+- [ ] Adicionar autenticação através do Google
 
 ---
 
