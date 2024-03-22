@@ -16,7 +16,6 @@ export const Content = forwardRef(
       closed: { opacity: 0, y: 6 },
       open: {
         opacity: 1,
-        scale: 1,
         y: 0,
         transition: {
           type: 'spring',

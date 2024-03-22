@@ -1,9 +1,23 @@
-import * as RadixPopover from '@radix-ui/react-popover'
-import { ReactNode } from 'react'
+import * as Popover from '@radix-ui/react-popover'
+import { createContext, useContext, useState } from 'react'
 
-interface RootProps extends RadixPopover.PopoverProps {
-  children: ReactNode
+const PopoverContext = createContext(false)
+
+export function Root({
+  open,
+  onOpenChange,
+  children,
+  ...props
+}: Popover.PopoverProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <PopoverContext.Provider value={open ?? isOpen}>
+      <Popover.Root onOpenChange={onOpenChange ?? setIsOpen} {...props}>
+        {children}
+      </Popover.Root>
+    </PopoverContext.Provider>
+  )
 }
-export function Root({ children, ...props }: RootProps) {
-  return <RadixPopover.Root {...props}>{children}</RadixPopover.Root>
-}
+
+export const usePopover = () => useContext(PopoverContext)
