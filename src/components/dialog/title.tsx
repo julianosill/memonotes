@@ -1,9 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { twMerge } from 'tailwind-merge'
 
-type TitleProps = Dialog.DialogTitleProps
-
-export function Title({ className, ...props }: TitleProps) {
+export function Title({ className, ...props }: Dialog.DialogTitleProps) {
   return (
     <Dialog.Title
       className={twMerge(

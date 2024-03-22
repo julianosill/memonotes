@@ -114,7 +114,7 @@ export function SpeechToTextDialog({
                 value={transcription}
                 onChange={(e) => setTranscription(e.target.value)}
                 placeholder="Inicie a gravação clicando no botão abaixo"
-                className="disabled:cursor-not-allowed"
+                className="min-h-[120px] disabled:cursor-not-allowed"
                 disabled={isRecording}
                 required
               />
