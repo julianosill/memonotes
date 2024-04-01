@@ -1,3 +1,5 @@
+'use client'
+
 import { Loader2, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'

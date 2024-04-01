@@ -11,6 +11,9 @@ export const env = createEnv({
     APP_ID: z.string(),
     MEASUREMENT_ID: z.string(),
   },
+  client: {
+    NEXT_PUBLIC_API_BASE_URL: z.string().url(),
+  },
   runtimeEnv: {
     API_KEY: process.env.API_KEY,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -19,5 +22,6 @@ export const env = createEnv({
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
+    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
 })
