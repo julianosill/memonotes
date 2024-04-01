@@ -1,3 +1,5 @@
+'use client'
+
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 import { INote } from '@/app/store'
