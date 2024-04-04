@@ -1,10 +1,10 @@
 'use client'
 
 import { Loader2, Trash2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
-import { useStore } from '@/app/store'
+import { deleteNote } from '@/api/delete-note'
 
 import { AlertDialog } from './alert-dialog'
 import { Tooltip } from './tooltip'
@@ -17,20 +17,21 @@ interface DeleteNoteProps {
 }
 
 export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
-  const { isPending, deleteNote } = useStore((store) => {
-    return { isPending: store.isPending, deleteNote: store.deleteNote }
-  })
-  const router = useRouter()
+  const [isPending, setIsPending] = useState(false)
 
   async function handleDeleteNote() {
-    await deleteNote(id)
+    setIsPending(true)
+
+    await deleteNote({ userId: 'userTest', noteId: id })
       .then(() => {
         toast.success('Nota deletada com sucesso!')
-        router.push('/')
       })
       .catch((error) => {
         console.error(error)
         toast.error('Não foi possível excluir a nota, tente novamente.')
+      })
+      .finally(() => {
+        setIsPending(false)
       })
   }
 
