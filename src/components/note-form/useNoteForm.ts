@@ -1,36 +1,29 @@
 import { useRouter } from 'next/navigation'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
-import { INote, useStore } from '@/app/store'
+import { INote } from '@/@types/note'
+import { createNote } from '@/api/create-note'
+import { updateNote } from '@/api/update-note'
+import { parseTags } from '@/utils/parse-tags'
 
 interface UseNoteFormProps {
-  noteId?: string
+  note?: INote
 }
 
-export function useNoteForm({ noteId }: UseNoteFormProps) {
-  const [note, setNote] = useState<INote | null>(null)
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [tagsInString, setTagsInString] = useState('')
-  const [isSpeechRecognitionAPIAvailable, setIsSpeechRecognitionAPIAvailable] =
-    useState(false)
-  const router = useRouter()
-  const { isPending, addNote, updateNote, fetchNotes, getNote } = useStore(
-    (store) => {
-      return {
-        isPending: store.isPending,
-        addNote: store.addNote,
-        updateNote: store.updateNote,
-        fetchNotes: store.fetchNotes,
-        getNote: store.getNote,
-      }
-    },
+export function useNoteForm({ note }: UseNoteFormProps) {
+  const [title, setTitle] = useState(note?.title ?? '')
+  const [content, setContent] = useState(note?.content ?? '')
+  const [tagString, setTagString] = useState(
+    note?.tags ? note.tags.join(', ') : '',
   )
+  const [isPending, setIsPending] = useState(false)
+  const [isSpeechAPIAvailable, setIsSpeechAPIAvailable] = useState(false)
 
+  const router = useRouter()
   const isSubmitDisabled = !title.trim() || !content.trim()
 
-  function addTranscriptionToNote(transcription: string) {
+  function addTranscription(transcription: string) {
     const previousContent = content.trim()
     previousContent
       ? setContent(`${content}\n\n${transcription}`)
@@ -46,8 +39,8 @@ export function useNoteForm({ noteId }: UseNoteFormProps) {
 
     let tags: string[] = []
 
-    if (tagsInString.length > 0) {
-      tags = Array.from(new Set(tagsInString.split(/\s+/)))
+    if (tagString.length > 0) {
+      tags = parseTags(tagString)
       const shortTag = tags.find((tag) => tag.length < 3)
 
       if (shortTag) {
@@ -55,58 +48,59 @@ export function useNoteForm({ noteId }: UseNoteFormProps) {
       }
     }
 
-    noteId
-      ? await updateNote({
-          id: noteId,
-          title: title.trim(),
-          content: content.trim(),
-          tags,
-        })
-          .then(() => {
-            toast.success('Nota atualizada com sucesso!')
-            router.back()
-            fetchNotes()
+    try {
+      setIsPending(true)
+
+      note
+        ? await updateNote({
+            userId: 'userTest',
+            noteId: note.id,
+            title,
+            content,
+            tags,
           })
-          .catch(() => {
-            toast.error('Ops, algo deu errado!')
+        : await createNote({
+            userId: 'userTest',
+            title,
+            content,
+            tags,
           })
-      : await addNote({ title: title.trim(), content: content.trim(), tags })
-          .then(() => {
-            toast.success('Nota adicionada com sucesso!')
-            setTitle('')
-            setContent('')
-            setTagsInString('')
-            router.push('/')
-            fetchNotes()
-          })
-          .catch(() => {
-            toast.error('Ops, algo deu errado!')
-          })
+
+      toast.success('Nota salva com sucesso!')
+      clearFormAndGoBack()
+    } catch (error) {
+      console.error(error)
+      toast.error('Ops, algo deu errado! Não foi possível salvar a nota.')
+    } finally {
+      setIsPending(false)
+    }
   }
 
-  function handleCancel() {
+  function clearFormAndGoBack() {
     setTitle('')
     setContent('')
-    setTagsInString('')
+    setTagString('')
     router.back()
   }
 
+  useEffect(() => {
+    setIsSpeechAPIAvailable(
+      'SpeechRecognition' in window || 'webkitSpeechRecognition' in window,
+    )
+  }, [setIsSpeechAPIAvailable])
+
   return {
-    note,
-    setNote,
     title,
     setTitle,
     content,
     setContent,
-    tagsInString,
-    setTagsInString,
-    getNote,
-    isSpeechRecognitionAPIAvailable,
-    setIsSpeechRecognitionAPIAvailable,
-    addTranscriptionToNote,
+    tagString,
+    setTagString,
+    addTranscription,
     isSubmitDisabled,
-    handleSubmit,
     isPending,
-    handleCancel,
+    handleSubmit,
+    clearFormAndGoBack,
+    isSpeechAPIAvailable,
   }
 }

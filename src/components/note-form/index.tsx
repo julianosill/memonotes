@@ -1,8 +1,8 @@
 'use client'
 
 import { CircleCheck, Info, LoaderCircle } from 'lucide-react'
-import { redirect } from 'next/navigation'
-import { useEffect } from 'react'
+
+import { INote } from '@/@types/note'
 
 import { Input } from '../input'
 import { Popover } from '../popover'
@@ -11,46 +11,24 @@ import { SpeechToTextDialog } from './speech-to-text-dialog'
 import { useNoteForm } from './useNoteForm'
 
 interface NoteFormProps {
-  noteId?: string
+  note?: INote
 }
 
-export function NoteForm({ noteId }: NoteFormProps) {
+export function NoteForm({ note }: NoteFormProps) {
   const {
     title,
     setTitle,
     content,
     setContent,
-    tagsInString,
-    setTagsInString,
-    getNote,
-    isSpeechRecognitionAPIAvailable,
-    setIsSpeechRecognitionAPIAvailable,
-    addTranscriptionToNote,
+    tagString,
+    setTagString,
+    addTranscription,
     isSubmitDisabled,
     handleSubmit,
+    clearFormAndGoBack,
     isPending,
-    handleCancel,
-  } = useNoteForm({ noteId })
-
-  useEffect(() => {
-    if (noteId) {
-      const data = getNote(noteId)
-
-      if (data) {
-        setTitle(data.title)
-        setContent(data.content)
-        if (data.tags) setTagsInString(data.tags.join(' '))
-      } else {
-        redirect('/')
-      }
-    }
-  }, [getNote, noteId, setContent, setTagsInString, setTitle])
-
-  useEffect(() => {
-    setIsSpeechRecognitionAPIAvailable(
-      'SpeechRecognition' in window || 'webkitSpeechRecognition' in window,
-    )
-  }, [setIsSpeechRecognitionAPIAvailable])
+    isSpeechAPIAvailable,
+  } = useNoteForm({ note })
 
   return (
     <form
@@ -73,10 +51,8 @@ export function NoteForm({ noteId }: NoteFormProps) {
       <Input.Root className="flex flex-1 flex-col gap-2">
         <div className="flex items-end justify-between">
           <Input.Label>Conteúdo</Input.Label>
-          {isSpeechRecognitionAPIAvailable && (
-            <SpeechToTextDialog
-              onAddTranscriptionToNote={addTranscriptionToNote}
-            />
+          {isSpeechAPIAvailable && (
+            <SpeechToTextDialog onAddTranscriptionToNote={addTranscription} />
           )}
         </div>
         <Input.Wrapper className="min-h-[160px] flex-1">
@@ -106,11 +82,11 @@ export function NoteForm({ noteId }: NoteFormProps) {
             <Popover.Content className="flex max-w-[320px] flex-col gap-3">
               <div className="font-semibold">Observações</div>
               <ul className="list-disc space-y-1 pl-4">
-                <li>Adicione tags separadas por espaço;</li>
+                <li>Adicione tags separadas por vírgula;</li>
                 <li>Cada tag deve conter 3 ou mais letras.</li>
               </ul>
               <span className="rounded border border-border-soft bg-muted px-2 py-1.5 font-mono text-xs">
-                Exemplo: estudos viagem trabalho
+                Exemplo: estudos, viagem, trabalho
               </span>
             </Popover.Content>
           </Popover.Root>
@@ -118,15 +94,15 @@ export function NoteForm({ noteId }: NoteFormProps) {
 
         <Input.Wrapper>
           <Input.Control
-            value={tagsInString}
-            onChange={(e) => setTagsInString(e.target.value)}
-            placeholder="Separe as tags por espaço, exemplo: estudos trabalho viagem"
+            value={tagString}
+            onChange={(e) => setTagString(e.target.value)}
+            placeholder="Separe as tags por vírgula, exemplo: estudos, trabalho, viagem"
           />
         </Input.Wrapper>
       </Input.Root>
 
       <div className="flex justify-end gap-4">
-        <Button type="button" onClick={handleCancel} variant="muted">
+        <Button type="button" onClick={clearFormAndGoBack} variant="muted">
           Cancelar
         </Button>
         <Button type="submit" disabled={isSubmitDisabled}>
