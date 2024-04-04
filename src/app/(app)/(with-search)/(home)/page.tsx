@@ -1,23 +1,12 @@
 import Image from 'next/image'
 
+import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { NoteList } from '@/components/note/note-list'
 import { TextLink } from '@/components/text-link'
-import { api } from '@/data/api'
-import { INote } from '@/data/types/note'
-
-async function fetchNotes(): Promise<INote[] | null> {
-  const response = await api('/notes', {
-    next: {
-      revalidate: 60 * 60, // 1h
-    },
-  })
-  const notes = await response.json()
-  return notes
-}
 
 export default async function HomePage() {
-  const notes = await fetchNotes()
+  const notes = await fetchNotes({ userId: 'userTest' })
 
   return (
     <main className="flex flex-1 flex-col">

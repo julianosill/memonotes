@@ -1,11 +1,8 @@
-'use client'
-
 import { SearchX } from 'lucide-react'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
-import { INote, useStore } from '@/app/store'
+import { searchNotes } from '@/api/search-notes'
 import emptyImage from '@/assets/empty.png'
 import { BackButton } from '@/components/back-button'
 import { NoteList } from '@/components/note/note-list'
@@ -17,34 +14,17 @@ interface SearchProps {
   }
 }
 
-export default function Search({ searchParams }: SearchProps) {
+export default async function Search({ searchParams }: SearchProps) {
   const { q: query } = searchParams
   if (!query) redirect('/')
 
-  const [notes, setNotes] = useState<INote[] | null>(null)
-
-  const { notes: storedNotes } = useStore((store) => {
-    return { notes: store.notes }
-  })
-
-  useEffect(() => {
-    const filteredNotes = storedNotes?.filter((note) => {
-      return (
-        note.title.toLocaleLowerCase().includes(query.toLocaleLowerCase()) ||
-        note.content.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-      )
-    })
-
-    if (!filteredNotes) return setNotes(null)
-
-    setNotes(filteredNotes)
-  }, [query, storedNotes])
+  const notes = await searchNotes({ userId: 'userTest', search: query })
 
   return (
     <main className="flex flex-1 flex-col gap-6">
       <BackButton className="self-start" />
 
-      {notes && notes.length > 0 ? (
+      {notes.length > 0 ? (
         <section className="space-y-4 lg:space-y-6">
           <p className="text-sm">
             Exibindo resultados para:{' '}

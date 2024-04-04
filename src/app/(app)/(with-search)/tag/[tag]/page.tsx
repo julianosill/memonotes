@@ -1,11 +1,8 @@
-'use client'
-
 import { SearchX } from 'lucide-react'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
-import { INote, useStore } from '@/app/store'
+import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { BackButton } from '@/components/back-button'
 import { NoteList } from '@/components/note/note-list'
@@ -17,25 +14,11 @@ interface TagsProps {
   }
 }
 
-export default function Tags({ params }: TagsProps) {
+export default async function Tags({ params }: TagsProps) {
   const { tag } = params
   if (!tag) redirect('/')
 
-  const [notes, setNotes] = useState<INote[] | null>(null)
-
-  const { notes: storedNotes } = useStore((store) => {
-    return { notes: store.notes }
-  })
-
-  useEffect(() => {
-    const filteredNotes = storedNotes?.filter((note) => {
-      return note.tags.includes(tag)
-    })
-
-    if (!filteredNotes) return setNotes(null)
-
-    setNotes(filteredNotes)
-  }, [tag, storedNotes])
+  const notes = await fetchNotes({ userId: 'userTest', tag })
 
   return (
     <main className="flex flex-1 flex-col gap-6">

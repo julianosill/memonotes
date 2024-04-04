@@ -1,43 +1,36 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
+import { getNote } from '@/api/get-note'
 import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
 import { EditNoteButton } from '@/components/edit-note-button'
-import { ParsedContent } from '@/components/parse-content'
+import { ParsedContent } from '@/components/parsed-content'
 import { Button } from '@/components/ui/button'
-import { api } from '@/data/api'
-import { INote } from '@/data/types/note'
 import { formatDate } from '@/utils/format-date'
 
-interface NoteProps {
+interface NotePageProps {
   params: {
     id: string
   }
 }
 
-async function getNote(id: string): Promise<INote> {
-  const response = await api(`/notes/${id}`, {
-    next: {
-      revalidate: 60 * 60, // 1h
-    },
-  })
-  const note = await response.json()
-  return note
-}
-
 export async function generateMetadata({
   params,
-}: NoteProps): Promise<Metadata> {
-  const note = await getNote(params.id)
+}: NotePageProps): Promise<Metadata> {
+  const note = await getNote({ userId: 'userTest', noteId: params.id })
 
   return { title: note.title }
 }
 
-export default async function NotePage({ params }: NoteProps) {
-  const note = await getNote(params.id)
+export default async function NotePage({ params }: NotePageProps) {
+  const { id } = params
+  if (!id) redirect('/')
 
-  if (!note) return null
+  const note = await getNote({ userId: 'userTest', noteId: id }).catch(() => {
+    redirect('/')
+  })
 
   return (
     <main className="flex flex-1 flex-col rounded-2xl bg-card p-8 shadow-md dark:border dark:border-border-soft md:p-12">
@@ -75,11 +68,11 @@ export default async function NotePage({ params }: NoteProps) {
             </span>
           </div>
         </div>
-        {note.tags && (
+        {note.tags.length > 0 && (
           <div className="flex flex-1 flex-col gap-3 text-sm max-lg:order-1">
             <h3 className="font-medium text-muted-foreground">Tags</h3>
             <div className="flex flex-wrap gap-3">
-              {note.tags.map((tag) => {
+              {note.tags.map((tag: string) => {
                 return (
                   <Button key={tag} variant="muted" size="xs" asChild>
                     <Link key={tag} href={`/tag/${tag}`}>
