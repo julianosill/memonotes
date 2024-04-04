@@ -10,9 +10,12 @@ import { LogoMemonotes } from '../logo/memonotes'
 import { AddNoteButton } from './add-note-button'
 import { NavItem } from './nav-item'
 import { Settings } from './settings'
-import { Tags } from './tags'
 
-export function Sidebar() {
+interface SidebarProps {
+  tags: string[]
+}
+
+export function Sidebar({ tags }: SidebarProps) {
   const [open, setOpen] = useState(false)
 
   function handleCloseMenu() {
@@ -62,10 +65,31 @@ export function Sidebar() {
               Notas
             </NavItem>
           </nav>
+
           <section className="w-full border-y border-memonotes-500 py-6 dark:border-memonotes-800">
             <AddNoteButton onNavigation={handleCloseMenu} to="/add" />
           </section>
-          <Tags onNavigation={handleCloseMenu} />
+
+          {tags && (
+            <section className="flex flex-1 flex-col gap-6 md:gap-4">
+              <span className="text-base font-semibold text-memonotes-300 dark:text-memonotes-400 md:text-sm">
+                Tags
+              </span>
+
+              <div className="flex flex-col gap-4 md:gap-3">
+                {tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    onClick={handleCloseMenu}
+                    href={`/tag/${tag}`}
+                    className="text-base font-medium text-zinc-200 hover:text-white dark:text-zinc-300 dark:hover:text-white md:text-sm"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         <Settings />
