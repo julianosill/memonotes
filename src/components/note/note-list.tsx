@@ -2,7 +2,7 @@
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
-import { INote } from '@/app/store'
+import { INote } from '@/@types/note'
 
 import { NoteCard } from './note-card'
 

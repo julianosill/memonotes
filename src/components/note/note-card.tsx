@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import { INote } from '@/app/store'
+import { INote } from '@/@types/note'
 import { DeleteNote } from '@/components/delete-note'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
