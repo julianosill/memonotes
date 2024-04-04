@@ -25,8 +25,8 @@ export function AboutContent({ trigger }: AboutContentProps) {
         Esta é uma aplicação desenvolvida para fins de estudos e exercícios
         práticos utilizando tecnologias como{' '}
         <span className="text-strong">Next.js</span>,{' '}
-        <span className="text-strong">TailwindCSS</span>,{' '}
-        <span className="text-strong">Zustand</span> e{' '}
+        <span className="text-strong">Firebase</span>,{' '}
+        <span className="text-strong">TailwindCSS</span> e{' '}
         <span className="text-strong">Radix-UI</span>.
       </Dialog.Description>
 
