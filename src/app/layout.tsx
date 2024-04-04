@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 
+import { env } from '@/env'
 import { ThemeColorProvider } from '@/providers/theme-color-provider'
 
 const inter = Inter({
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   },
   description:
     'Aplicação web para gerenciamento de notas e transcrição de áudio em tempo real.',
-  metadataBase: new URL('https://memonotes-js.vercel.app'),
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_BASE_URL),
 }
 
 export default function RootLayout({
