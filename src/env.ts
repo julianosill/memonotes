@@ -10,9 +10,10 @@ export const env = createEnv({
     MESSAGING_SENDER_ID: z.string(),
     APP_ID: z.string(),
     MEASUREMENT_ID: z.string(),
+    COLLECTION_NAME: z.string(),
   },
   client: {
-    NEXT_PUBLIC_API_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_APP_BASE_URL: z.string().url(),
   },
   runtimeEnv: {
     API_KEY: process.env.API_KEY,
@@ -22,6 +23,7 @@ export const env = createEnv({
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
-    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    COLLECTION_NAME: process.env.COLLECTION_NAME,
+    NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
   },
 })
