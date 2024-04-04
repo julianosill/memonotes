@@ -1,17 +1,27 @@
-import { doc, getDoc } from 'firebase/firestore'
-import { z } from 'zod'
+'use server'
 
+import { doc, getDoc } from 'firebase/firestore'
+
+import { env } from '@/env'
 import { db } from '@/libs/firebase'
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const id = z.string().parse(params.id)
+interface GetNoteProps {
+  userId: string
+  noteId: string
+}
 
-  const docRef = doc(db, 'test', id)
+export async function getNote({ userId, noteId }: GetNoteProps) {
+  const docRef = doc(db, env.COLLECTION_NAME, noteId)
   const docSnap = await getDoc(docRef)
   const data = docSnap.data()
 
-  if (!data)
-    return Response.json({ message: 'Note not found' }, { status: 404 })
+  if (!data) {
+    throw new Error('Note not found')
+  }
+
+  if (data.userId !== userId) {
+    throw new Error('Unauthorized')
+  }
 
   const note = {
     id: docSnap.id,
@@ -22,5 +32,5 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
     updatedAt: data.updatedAt ? data.updatedAt.toDate() : null,
   }
 
-  return Response.json(note)
+  return note
 }
