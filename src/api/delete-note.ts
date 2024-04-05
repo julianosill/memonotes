@@ -5,15 +5,15 @@ import { revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { env } from '@/env'
+import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
 
-interface DeleteNoteProps {
-  userId: string
-  noteId: string
-}
+export async function deleteNote(id: string) {
+  const session = await getUserServer()
+  if (!session) throw new Error('Unauthorized')
+  const userId = session?.user.id
 
-export async function deleteNote({ userId, noteId }: DeleteNoteProps) {
-  const docRef = doc(db, env.COLLECTION_NAME, noteId)
+  const docRef = doc(db, env.COLLECTION_NAME, id)
   const docSnap = await getDoc(docRef)
   const note = docSnap.data()
 
@@ -25,7 +25,7 @@ export async function deleteNote({ userId, noteId }: DeleteNoteProps) {
     throw new Error('Unauthorized')
   }
 
-  await deleteDoc(doc(db, env.COLLECTION_NAME, noteId))
+  await deleteDoc(doc(db, env.COLLECTION_NAME, id))
 
   revalidateTag('notes')
   redirect('/')

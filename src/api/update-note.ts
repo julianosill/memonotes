@@ -4,24 +4,27 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { revalidateTag } from 'next/cache'
 
 import { env } from '@/env'
+import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
 
 interface UpdateNoteProps {
-  userId: string
-  noteId: string
+  id: string
   title: string
   content: string
   tags: string[]
 }
 
 export async function updateNote({
-  userId,
-  noteId,
+  id,
   title,
   content,
   tags,
 }: UpdateNoteProps) {
-  const docRef = doc(db, env.COLLECTION_NAME, noteId)
+  const session = await getUserServer()
+  if (!session) throw new Error('Unauthorized')
+  const userId = session?.user.id
+
+  const docRef = doc(db, env.COLLECTION_NAME, id)
   const docSnap = await getDoc(docRef)
   const data = docSnap.data()
 

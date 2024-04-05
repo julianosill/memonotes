@@ -3,15 +3,15 @@
 import { doc, getDoc } from 'firebase/firestore'
 
 import { env } from '@/env'
+import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
 
-interface GetNoteProps {
-  userId: string
-  noteId: string
-}
+export async function getNote(id: string) {
+  const session = await getUserServer()
+  if (!session) throw new Error('Unauthorized')
+  const userId = session?.user.id
 
-export async function getNote({ userId, noteId }: GetNoteProps) {
-  const docRef = doc(db, env.COLLECTION_NAME, noteId)
+  const docRef = doc(db, env.COLLECTION_NAME, id)
   const docSnap = await getDoc(docRef)
   const data = docSnap.data()
 

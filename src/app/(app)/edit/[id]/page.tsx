@@ -19,7 +19,7 @@ export default async function EditNotePage({ params }: EditNoteProps) {
   const { id } = params
   if (!id) redirect('/')
 
-  const note = await getNote({ userId: 'userTest', noteId: id }).catch(() => {
+  const note = await getNote(id).catch(() => {
     redirect('/')
   })
 

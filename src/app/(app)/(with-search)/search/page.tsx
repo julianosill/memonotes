@@ -18,7 +18,7 @@ export default async function Search({ searchParams }: SearchProps) {
   const { q: query } = searchParams
   if (!query) redirect('/')
 
-  const notes = await searchNotes({ userId: 'userTest', search: query })
+  const notes = await searchNotes(query)
 
   return (
     <main className="flex flex-1 flex-col gap-6">

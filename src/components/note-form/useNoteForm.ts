@@ -53,14 +53,12 @@ export function useNoteForm({ note }: UseNoteFormProps) {
 
       note
         ? await updateNote({
-            userId: 'userTest',
-            noteId: note.id,
+            id: note.id,
             title,
             content,
             tags,
           })
         : await createNote({
-            userId: 'userTest',
             title,
             content,
             tags,

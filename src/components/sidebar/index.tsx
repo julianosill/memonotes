@@ -70,7 +70,7 @@ export function Sidebar({ tags }: SidebarProps) {
             <AddNoteButton onNavigation={handleCloseMenu} to="/add" />
           </section>
 
-          {tags && (
+          {tags.length > 0 && (
             <section className="flex flex-1 flex-col gap-6 md:gap-4">
               <span className="text-base font-semibold text-memonotes-300 dark:text-memonotes-400 md:text-sm">
                 Tags

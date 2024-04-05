@@ -4,14 +4,18 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
 
 import { INote } from '@/@types/note'
 import { env } from '@/env'
+import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
 
 interface FetchNotesProps {
-  userId: string
   tag?: string
 }
 
-export async function fetchNotes({ userId, tag }: FetchNotesProps) {
+export async function fetchNotes({ tag }: FetchNotesProps = {}) {
+  const session = await getUserServer()
+  if (!session) throw new Error('Unauthorized')
+  const userId = session?.user.id
+
   const notes: INote[] = []
   const docsRef = collection(db, env.COLLECTION_NAME)
   let q = query(

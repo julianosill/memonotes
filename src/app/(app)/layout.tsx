@@ -5,7 +5,7 @@ import { fetchTags } from '@/api/fetch-tags'
 import { Sidebar } from '@/components/sidebar'
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
-  const tags = await fetchTags({ userId: 'userTest' })
+  const tags = await fetchTags()
 
   return (
     <div

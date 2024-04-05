@@ -3,13 +3,14 @@
 import { collection, getDocs, query, where } from 'firebase/firestore'
 
 import { env } from '@/env'
+import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
 
-interface FetchTagsProps {
-  userId: string
-}
+export async function fetchTags() {
+  const session = await getUserServer()
+  if (!session) throw new Error('Unauthorized')
+  const userId = session?.user.id
 
-export async function fetchTags({ userId }: FetchTagsProps) {
   const noteTags: string[] = []
   const docsRef = collection(db, env.COLLECTION_NAME)
   const q = query(docsRef, where('userId', '==', userId))

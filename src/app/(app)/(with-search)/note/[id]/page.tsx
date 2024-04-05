@@ -19,7 +19,7 @@ interface NotePageProps {
 export async function generateMetadata({
   params,
 }: NotePageProps): Promise<Metadata> {
-  const note = await getNote({ userId: 'userTest', noteId: params.id })
+  const note = await getNote(params.id)
 
   return { title: note.title }
 }
@@ -28,7 +28,7 @@ export default async function NotePage({ params }: NotePageProps) {
   const { id } = params
   if (!id) redirect('/')
 
-  const note = await getNote({ userId: 'userTest', noteId: id }).catch(() => {
+  const note = await getNote(id).catch(() => {
     redirect('/')
   })
 

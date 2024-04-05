@@ -22,7 +22,7 @@ export function DeleteNote({ id, title, size = 'base' }: DeleteNoteProps) {
   async function handleDeleteNote() {
     setIsPending(true)
 
-    await deleteNote({ userId: 'userTest', noteId: id })
+    await deleteNote(id)
       .then(() => {
         toast.success('Nota deletada com sucesso!')
       })

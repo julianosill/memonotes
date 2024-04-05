@@ -6,7 +6,7 @@ import { NoteList } from '@/components/note/note-list'
 import { TextLink } from '@/components/text-link'
 
 export default async function HomePage() {
-  const notes = await fetchNotes({ userId: 'userTest' })
+  const notes = await fetchNotes()
 
   return (
     <main className="flex flex-1 flex-col">

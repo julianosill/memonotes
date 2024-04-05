@@ -18,7 +18,7 @@ export default async function Tags({ params }: TagsProps) {
   const { tag } = params
   if (!tag) redirect('/')
 
-  const notes = await fetchNotes({ userId: 'userTest', tag })
+  const notes = await fetchNotes({ tag })
 
   return (
     <main className="flex flex-1 flex-col gap-6">
@@ -26,7 +26,7 @@ export default async function Tags({ params }: TagsProps) {
 
       {notes && notes.length > 0 ? (
         <section className="space-y-4 lg:space-y-6">
-          <p className="border-b border-border-soft pb-2 text-sm">
+          <p className="text-sm">
             Exibindo notas contendo a tag:{' '}
             <span className="font-medium text-strong">{tag}</span>
           </p>
