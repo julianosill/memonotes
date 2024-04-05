@@ -3,6 +3,8 @@ import { z } from 'zod'
 
 export const env = createEnv({
   server: {
+    GOOGLE_CLIENT_ID: z.string(),
+    GOOGLE_CLIENT_SECRET: z.string(),
     API_KEY: z.string(),
     AUTH_DOMAIN: z.string(),
     PROJECT_ID: z.string(),
@@ -16,6 +18,8 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_BASE_URL: z.string().url(),
   },
   runtimeEnv: {
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     API_KEY: process.env.API_KEY,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
     PROJECT_ID: process.env.PROJECT_ID,
