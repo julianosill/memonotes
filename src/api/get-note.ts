@@ -3,8 +3,8 @@
 import { doc, getDoc } from 'firebase/firestore'
 
 import { env } from '@/env'
-import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
+import { getUserServer } from '@/libs/next-auth'
 
 export async function getNote(id: string) {
   const session = await getUserServer()

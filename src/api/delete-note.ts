@@ -5,8 +5,8 @@ import { revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { env } from '@/env'
-import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
+import { getUserServer } from '@/libs/next-auth'
 
 export async function deleteNote(id: string) {
   const session = await getUserServer()

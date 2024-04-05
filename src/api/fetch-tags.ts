@@ -3,8 +3,8 @@
 import { collection, getDocs, query, where } from 'firebase/firestore'
 
 import { env } from '@/env'
-import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
+import { getUserServer } from '@/libs/next-auth'
 
 export async function fetchTags() {
   const session = await getUserServer()

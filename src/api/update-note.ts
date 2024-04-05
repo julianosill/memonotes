@@ -4,8 +4,8 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { revalidateTag } from 'next/cache'
 
 import { env } from '@/env'
-import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
+import { getUserServer } from '@/libs/next-auth'
 
 interface UpdateNoteProps {
   id: string

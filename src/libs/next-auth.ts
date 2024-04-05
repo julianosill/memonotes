@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google'
 
 import { env } from '@/env'
 
-export const authConfig: NextAuthOptions = {
+export const nextAuthConfig: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -27,11 +27,11 @@ export const authConfig: NextAuthOptions = {
 }
 
 export async function loginRequiredServer() {
-  const session = await getServerSession(authConfig)
+  const session = await getServerSession(nextAuthConfig)
   if (!session) return redirect('/api/auth/signin')
 }
 
 export async function getUserServer() {
-  const session = await getServerSession(authConfig)
+  const session = await getServerSession(nextAuthConfig)
   return session
 }

@@ -4,8 +4,8 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore'
 
 import { INote } from '@/@types/note'
 import { env } from '@/env'
-import { getUserServer } from '@/libs/auth'
 import { db } from '@/libs/firebase'
+import { getUserServer } from '@/libs/next-auth'
 
 interface FetchNotesProps {
   tag?: string
