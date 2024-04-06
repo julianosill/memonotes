@@ -52,6 +52,6 @@
   }
 
   a:focus-visible {
-    @apply outline outline-2 outline-memonotes-800 dark:outline-accent-foreground outline-offset-4 rounded;
+    @apply outline outline-2 outline-accent-foreground outline-offset-4 rounded;
   }
 }
