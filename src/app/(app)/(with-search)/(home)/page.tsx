@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { NoteList } from '@/components/note/note-list'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 
 export default async function HomePage() {
   const notes = await fetchNotes()

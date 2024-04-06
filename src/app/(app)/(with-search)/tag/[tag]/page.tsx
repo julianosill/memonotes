@@ -6,7 +6,7 @@ import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { BackButton } from '@/components/back-button'
 import { NoteList } from '@/components/note/note-list'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 
 interface TagsProps {
   params: {

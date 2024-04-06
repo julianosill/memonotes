@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 
 import { Dialog } from '@/components/dialog'
 import { Popover } from '@/components/popover'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 import { Tooltip } from '@/components/tooltip'
 
 import { Input } from '../../input'
