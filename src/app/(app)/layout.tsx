@@ -3,8 +3,11 @@ import { twMerge } from 'tailwind-merge'
 
 import { fetchTags } from '@/api/fetch-tags'
 import { Sidebar } from '@/components/sidebar'
+import { loginRequiredServer } from '@/libs/next-auth'
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
+  await loginRequiredServer()
+
   const tags = await fetchTags()
 
   return (

@@ -28,7 +28,7 @@ export const nextAuthConfig: NextAuthOptions = {
 
 export async function loginRequiredServer() {
   const session = await getServerSession(nextAuthConfig)
-  if (!session) return redirect('/api/auth/signin')
+  if (!session) return redirect('/sign-in')
 }
 
 export async function getUserServer() {

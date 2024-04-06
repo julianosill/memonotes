@@ -3,10 +3,12 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Menu, NotebookText, X } from 'lucide-react'
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { LogoMemonotes } from '../logo/memonotes'
+import { Button } from '../ui/button'
 import { AddNoteButton } from './add-note-button'
 import { NavItem } from './nav-item'
 import { Settings } from './settings'
@@ -20,6 +22,10 @@ export function Sidebar({ tags }: SidebarProps) {
 
   function handleCloseMenu() {
     setOpen(false)
+  }
+
+  async function handleSignOut() {
+    await signOut()
   }
 
   return (
@@ -91,6 +97,10 @@ export function Sidebar({ tags }: SidebarProps) {
             </section>
           )}
         </div>
+
+        <Button size="sm" onClick={handleSignOut}>
+          Sair
+        </Button>
 
         <Settings />
       </Collapsible.Content>
