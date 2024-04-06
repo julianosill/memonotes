@@ -5,7 +5,7 @@ import { ComponentProps, forwardRef } from 'react'
 import { cn } from '@/utils/class-name-merge'
 
 const buttonVariants = cva(
-  'flex items-center justify-center rounded-md font-medium leading-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'flex items-center justify-center rounded-md font-medium leading-tight outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -23,9 +23,9 @@ const buttonVariants = cva(
           'bg-destructive text-destructive-foreground hover:bg-destructive-foreground hover:text-destructive',
       },
       size: {
-        default: 'h-10 px-4 gap-2',
-        sm: 'h-8 px-3 gap-1.5 text-sm',
-        xs: 'h-6 px-2 gap-1 text-xs rounded',
+        default: 'px-4 py-2.5 gap-2',
+        sm: 'px-3 py-1.5 gap-1.5 text-sm',
+        xs: 'px-2 py-1 gap-1 text-xs rounded',
       },
     },
     defaultVariants: {
