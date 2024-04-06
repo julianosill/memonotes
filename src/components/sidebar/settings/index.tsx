@@ -11,11 +11,11 @@ import { useTheme } from 'next-themes'
 import { useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
+import { AboutDialog } from '@/components/about-dialog'
 import { Dialog } from '@/components/dialog'
 import { DropdownMenu } from '@/components/dropdown-menu'
 
 import { Button } from '../../ui/button'
-import { AboutContent } from './about-content'
 import { SettingsItem } from './settings-item'
 
 export function Settings() {
@@ -73,7 +73,7 @@ export function Settings() {
         </DropdownMenu.Content>
       </DropdownMenu.Root>
 
-      <AboutContent trigger={dropdownTriggerRef} />
+      <AboutDialog trigger={dropdownTriggerRef} />
     </Dialog.Root>
   )
 }
