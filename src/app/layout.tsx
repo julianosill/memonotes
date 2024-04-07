@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 
+import { ThemeProvider } from '@/components/theme/theme-provider'
 import { env } from '@/env'
-import { ThemeColorProvider } from '@/providers/theme-color-provider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,11 +34,11 @@ export default function RootLayout({
       className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-500`}
       suppressHydrationWarning
     >
-      <body className="antialiased transition-colors ">
-        <ThemeColorProvider>
+      <body className="antialiased">
+        <ThemeProvider>
           <Toaster richColors position="top-right" />
           {children}
-        </ThemeColorProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
