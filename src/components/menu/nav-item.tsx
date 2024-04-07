@@ -3,7 +3,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ComponentProps, ReactElement, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
+
+import { useSidebar } from './_sidebar'
 
 export interface NavItemProps extends ComponentProps<typeof Link> {
   icon?: ReactElement
@@ -11,23 +14,24 @@ export interface NavItemProps extends ComponentProps<typeof Link> {
 }
 
 export function NavItem({ icon: Icon, children, ...props }: NavItemProps) {
+  const { onNavigation } = useSidebar()
   const pathname = usePathname()
   const isActive = pathname === props.href
 
   return (
     <Link
-      className={twMerge(
+      onClick={onNavigation}
+      className={cn(
         'group flex items-center gap-3 py-2 text-lg font-medium md:text-base',
         'text-zinc-200 hover:text-white',
         'dark:text-zinc-300 dark:hover:text-white',
-        props.className,
       )}
       {...props}
     >
       {Icon && (
         <Icon.type
           {...Icon.props}
-          className={twMerge(
+          className={cn(
             'size-6 group-hover:text-white md:size-5',
             isActive
               ? 'text-memonotes-200 dark:text-memonotes-300'

@@ -1,14 +1,11 @@
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { fetchTags } from '@/api/fetch-tags'
-import { Sidebar } from '@/components/sidebar'
+import { Menu } from '@/components/menu'
 import { loginRequiredServer } from '@/libs/next-auth'
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   await loginRequiredServer()
-
-  const tags = await fetchTags()
 
   return (
     <div
@@ -18,7 +15,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         'lg:gap-12',
       )}
     >
-      <Sidebar tags={tags} />
+      <Menu />
       <div className="flex w-full flex-col pt-14 md:col-start-2 md:pt-0">
         {children}
       </div>
