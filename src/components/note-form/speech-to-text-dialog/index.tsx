@@ -10,12 +10,12 @@ import {
 import { useEffect, useState } from 'react'
 
 import { Dialog } from '@/components/dialog'
+import { Input } from '@/components/input'
 import { Popover } from '@/components/popover'
-import { TextLink } from '@/components/ui/text-link'
 import { Tooltip } from '@/components/tooltip'
+import { Button } from '@/components/ui/button'
+import { TextLink } from '@/components/ui/text-link'
 
-import { Input } from '../../input'
-import { Button } from '../../ui/button'
 import { useSpeechToText } from './useSpeechToText'
 
 interface SpeechToTextDialogProps {
