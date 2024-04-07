@@ -12,9 +12,7 @@ interface FetchNotesProps {
 }
 
 export async function fetchNotes({ tag }: FetchNotesProps = {}) {
-  const session = await getUserServer()
-  if (!session) throw new Error('Unauthorized')
-  const userId = session?.user.id
+  const { id: userId } = await getUserServer()
 
   const notes: INote[] = []
   const docsRef = collection(db, env.COLLECTION_NAME)

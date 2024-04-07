@@ -33,5 +33,11 @@ export async function loginRequiredServer() {
 
 export async function getUserServer() {
   const session = await getServerSession(nextAuthConfig)
-  return session
+  const user = session?.user
+
+  if (!user) {
+    throw new Error('Unauthorized')
+  }
+
+  return user
 }

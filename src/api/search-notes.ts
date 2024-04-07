@@ -8,9 +8,7 @@ import { db } from '@/libs/firebase'
 import { getUserServer } from '@/libs/next-auth'
 
 export async function searchNotes(search: string) {
-  const session = await getUserServer()
-  if (!session) throw new Error('Unauthorized')
-  const userId = session?.user.id
+  const { id: userId } = await getUserServer()
 
   const notes: INote[] = []
   const docsRef = collection(db, env.COLLECTION_NAME)

@@ -14,9 +14,7 @@ interface CreateNoteProps {
 }
 
 export async function createNote({ title, content, tags }: CreateNoteProps) {
-  const session = await getUserServer()
-  if (!session) throw new Error('Unauthorized')
-  const userId = session?.user.id
+  const { id: userId } = await getUserServer()
 
   await addDoc(collection(db, env.COLLECTION_NAME), {
     userId,

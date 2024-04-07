@@ -7,9 +7,7 @@ import { db } from '@/libs/firebase'
 import { getUserServer } from '@/libs/next-auth'
 
 export async function getNote(id: string) {
-  const session = await getUserServer()
-  if (!session) throw new Error('Unauthorized')
-  const userId = session?.user.id
+  const { id: userId } = await getUserServer()
 
   const docRef = doc(db, env.COLLECTION_NAME, id)
   const docSnap = await getDoc(docRef)

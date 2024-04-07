@@ -1,12 +1,13 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth/next'
 import { twMerge } from 'tailwind-merge'
 
 import bgImage from '@/assets/login-bg.jpg'
 import { LogoMemonotes } from '@/components/logo/memonotes'
 import { TextLink } from '@/components/ui/text-link'
-import { getUserServer } from '@/libs/next-auth'
+import { nextAuthConfig } from '@/libs/next-auth'
 
 import { AboutProject } from './_components/about-project'
 import { GoogleButton } from './_components/google-button'
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default async function SignInPage() {
-  const session = await getUserServer()
+  const session = await getServerSession(nextAuthConfig)
   if (session) return redirect('/')
 
   return (

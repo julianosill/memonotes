@@ -20,9 +20,7 @@ export async function updateNote({
   content,
   tags,
 }: UpdateNoteProps) {
-  const session = await getUserServer()
-  if (!session) throw new Error('Unauthorized')
-  const userId = session?.user.id
+  const { id: userId } = await getUserServer()
 
   const docRef = doc(db, env.COLLECTION_NAME, id)
   const docSnap = await getDoc(docRef)
