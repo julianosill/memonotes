@@ -36,7 +36,7 @@ export const Content = forwardRef(
               align="start"
               sideOffset={4}
               className={twMerge(
-                'z-20 space-y-4 rounded-md bg-card px-6 py-5 shadow-lg ring-1 ring-border-soft',
+                'z-20 flex max-w-fit flex-col gap-4 rounded-md bg-card p-6 shadow-lg ring-1 ring-border-soft max-md:w-[calc(100vw-3rem)]',
                 className,
               )}
               {...props}
