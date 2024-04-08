@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px',
+      },
       gridTemplateColumns: {
         app: '15rem 1fr',
       },

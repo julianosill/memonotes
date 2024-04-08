@@ -1,7 +1,8 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useDropdownMenu } from './root'
 
@@ -35,8 +36,8 @@ export const Content = forwardRef(
               side="top"
               align="start"
               sideOffset={4}
-              className={twMerge(
-                'z-20 space-y-4 rounded-md bg-card px-6 py-5 shadow-lg ring-1 ring-border-soft',
+              className={cn(
+                'z-20 flex max-w-fit flex-col gap-4 rounded-md bg-card p-6 shadow-lg ring-1 ring-border-soft max-md:w-[calc(100vw-3rem)]',
                 className,
               )}
               {...props}

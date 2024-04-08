@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import { INote } from '@/app/store'
+import { INote } from '@/@types/note'
 import { DeleteNote } from '@/components/delete-note'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
@@ -16,7 +16,7 @@ export function NoteCard({ note }: NoteCardProps) {
 
   return (
     <article className="group relative flex w-full flex-col rounded-xl border border-transparent bg-card p-5 shadow transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md dark:border-border-soft lg:p-8">
-      <div className="absolute right-3 top-3 transition-all group-hover:opacity-100 md:opacity-0">
+      <div className="absolute right-3 top-3 transition-all focus-within:opacity-100 group-hover:opacity-100 md:opacity-0">
         <DeleteNote id={note.id} title={note.title} size="sm" />
       </div>
 

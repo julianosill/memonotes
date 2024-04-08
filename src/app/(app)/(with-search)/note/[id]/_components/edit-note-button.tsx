@@ -3,8 +3,8 @@
 import { NotebookPen } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import { Tooltip } from './tooltip'
-import { Button } from './ui/button'
+import { Tooltip } from '@/components/tooltip'
+import { Button } from '@/components/ui/button'
 
 interface EditNoteButtonProps {
   id: string

@@ -2,7 +2,8 @@ import * as Popover from '@radix-ui/react-popover'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { Button } from '../ui/button'
 import { usePopover } from './root'
@@ -37,7 +38,7 @@ export const Content = forwardRef(
               side="top"
               collisionPadding={16}
               sideOffset={4}
-              className={twMerge(
+              className={cn(
                 'z-30 w-[calc(100vw-36px)] rounded-md bg-background p-4 text-sm shadow-lg ring-1 ring-border-soft',
                 className,
               )}

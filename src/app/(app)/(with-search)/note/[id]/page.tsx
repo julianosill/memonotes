@@ -1,38 +1,37 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client'
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-
-import { INote, useStore } from '@/app/store'
+import { getNote } from '@/api/get-note'
 import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
-import { EditNoteButton } from '@/components/edit-note-button'
-import { ParsedContent } from '@/components/parse-content'
+import { ParsedContent } from '@/components/parsed-content'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
 
-interface NoteDetailsProps {
+import { EditNoteButton } from './_components/edit-note-button'
+
+interface NotePageProps {
   params: {
     id: string
   }
 }
 
-export default function NoteDetails({ params }: NoteDetailsProps) {
+export async function generateMetadata({
+  params,
+}: NotePageProps): Promise<Metadata> {
+  const note = await getNote(params.id)
+
+  return { title: note.title }
+}
+
+export default async function NotePage({ params }: NotePageProps) {
   const { id } = params
-  const { getNote } = useStore((store) => {
-    return { getNote: store.getNote }
+  if (!id) redirect('/')
+
+  const note = await getNote(id).catch(() => {
+    redirect('/')
   })
-  const [note, setNote] = useState<INote | null>(null)
-
-  const router = useRouter()
-
-  useEffect(() => {
-    const data = getNote(id)
-    setNote(data)
-  }, [])
-
-  if (!note) return null
 
   return (
     <main className="flex flex-1 flex-col rounded-2xl bg-card p-8 shadow-md dark:border dark:border-border-soft md:p-12">
@@ -74,15 +73,12 @@ export default function NoteDetails({ params }: NoteDetailsProps) {
           <div className="flex flex-1 flex-col gap-3 text-sm max-lg:order-1">
             <h3 className="font-medium text-muted-foreground">Tags</h3>
             <div className="flex flex-wrap gap-3">
-              {note.tags.map((tag) => {
+              {note.tags.map((tag: string) => {
                 return (
-                  <Button
-                    key={tag}
-                    onClick={() => router.push(`/tag/${tag}`)}
-                    variant="muted"
-                    size="xs"
-                  >
-                    {tag}
+                  <Button key={tag} variant="muted" size="xs" asChild>
+                    <Link key={tag} href={`/tag/${tag}`}>
+                      {tag}
+                    </Link>
                   </Button>
                 )
               })}

@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 
 import notFoundImage from '@/assets/404-not-found.png'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 
 export const metadata: Metadata = {
   title: 'Erro 404',

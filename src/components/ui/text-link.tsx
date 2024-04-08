@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 type TextLinkProps = ComponentProps<'a'>
 
@@ -7,7 +8,7 @@ export function TextLink({ href, className, ...props }: TextLinkProps) {
   return (
     <a
       href={href}
-      className={twMerge(
+      className={cn(
         'font-medium text-strong underline underline-offset-2 hover:text-accent-foreground',
         className,
       )}

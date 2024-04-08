@@ -1,15 +1,12 @@
-'use client'
-
 import { SearchX } from 'lucide-react'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
-import { INote, useStore } from '@/app/store'
+import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { BackButton } from '@/components/back-button'
 import { NoteList } from '@/components/note/note-list'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 
 interface TagsProps {
   params: {
@@ -17,25 +14,11 @@ interface TagsProps {
   }
 }
 
-export default function Tags({ params }: TagsProps) {
+export default async function Tags({ params }: TagsProps) {
   const { tag } = params
   if (!tag) redirect('/')
 
-  const [notes, setNotes] = useState<INote[] | null>(null)
-
-  const { notes: storedNotes } = useStore((store) => {
-    return { notes: store.notes }
-  })
-
-  useEffect(() => {
-    const filteredNotes = storedNotes?.filter((note) => {
-      return note.tags.includes(tag)
-    })
-
-    if (!filteredNotes) return setNotes(null)
-
-    setNotes(filteredNotes)
-  }, [tag, storedNotes])
+  const notes = await fetchNotes({ tag })
 
   return (
     <main className="flex flex-1 flex-col gap-6">
@@ -43,7 +26,7 @@ export default function Tags({ params }: TagsProps) {
 
       {notes && notes.length > 0 ? (
         <section className="space-y-4 lg:space-y-6">
-          <p className="border-b border-border-soft pb-2 text-sm">
+          <p className="text-sm">
             Exibindo notas contendo a tag:{' '}
             <span className="font-medium text-strong">{tag}</span>
           </p>

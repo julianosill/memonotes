@@ -1,5 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 export function Label({
   className,
@@ -7,7 +8,7 @@ export function Label({
 }: DropdownMenu.DropdownMenuLabelProps) {
   return (
     <DropdownMenu.Label
-      className={twMerge('pb-1 text-sm font-semibold', className)}
+      className={cn('pb-1 text-sm font-semibold', className)}
       {...props}
     />
   )

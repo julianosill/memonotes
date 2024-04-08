@@ -1,12 +1,11 @@
 import './globals.css'
 
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 
-import { ThemeColorProvider } from '@/providers/theme-color-provider'
+import { ThemeProvider } from '@/components/theme/theme-provider'
+import { env } from '@/env'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
   },
   description:
     'Aplicação web para gerenciamento de notas e transcrição de áudio em tempo real.',
-  metadataBase: new URL('https://memonotes-js.vercel.app'),
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_BASE_URL),
 }
 
 export default function RootLayout({
@@ -35,13 +34,11 @@ export default function RootLayout({
       className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-500`}
       suppressHydrationWarning
     >
-      <body className="antialiased transition-colors ">
-        <ThemeColorProvider>
+      <body className="antialiased">
+        <ThemeProvider>
           <Toaster richColors position="top-right" />
           {children}
-        </ThemeColorProvider>
-        <Analytics />
-        <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   )

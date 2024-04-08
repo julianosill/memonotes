@@ -4,24 +4,21 @@ import { CirclePlus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '../ui/button'
+import { useSidebar } from './_sidebar'
 
-interface AddNoteButtonProps {
-  onNavigation: () => void
-  to: string
-}
-
-export function AddNoteButton({ to, onNavigation }: AddNoteButtonProps) {
+export function AddNoteButton() {
+  const { onNavigation } = useSidebar()
   const router = useRouter()
 
   function handleNavigation() {
     onNavigation()
-    router.push(to)
+    router.push('/add')
   }
 
   return (
     <Button
       onClick={handleNavigation}
-      className="group h-12 w-full justify-start whitespace-nowrap bg-memonotes-500 text-base dark:bg-memonotes-800 dark:hover:bg-memonotes-700 dark:hover:text-white md:h-10 md:text-sm"
+      className="group w-full justify-start whitespace-nowrap bg-memonotes-500 dark:bg-memonotes-800 dark:hover:bg-memonotes-700 dark:hover:text-white max-md:py-3 md:text-sm"
     >
       <CirclePlus className="size-5 text-memonotes-300 transition-colors group-hover:text-primary dark:group-hover:text-white md:size-4" />
       Nova nota

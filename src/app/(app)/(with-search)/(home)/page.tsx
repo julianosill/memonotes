@@ -1,16 +1,12 @@
-'use client'
-
 import Image from 'next/image'
 
-import { useStore } from '@/app/store'
+import { fetchNotes } from '@/api/fetch-notes'
 import emptyImage from '@/assets/empty.png'
 import { NoteList } from '@/components/note/note-list'
-import { TextLink } from '@/components/text-link'
+import { TextLink } from '@/components/ui/text-link'
 
-export default function Home() {
-  const { notes } = useStore((store) => {
-    return { notes: store.notes }
-  })
+export default async function HomePage() {
+  const notes = await fetchNotes()
 
   return (
     <main className="flex flex-1 flex-col">
