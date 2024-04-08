@@ -2,8 +2,9 @@
 
 import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ComponentProps, FormEvent } from 'react'
+import { ComponentProps, FormEvent, useEffect, useState } from 'react'
 
+import { useDebounce } from '@/hooks/use-debounce'
 import { cn } from '@/utils/class-name-merge'
 
 type SearchFormProps = ComponentProps<'form'>
@@ -11,20 +12,24 @@ type SearchFormProps = ComponentProps<'form'>
 export function SearchForm({ className, ...props }: SearchFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const queryParam = searchParams.get('q')
 
-  const query = searchParams.get('q')
+  const [query, setQuery] = useState(queryParam ?? '')
+  const debouncedSearch = useDebounce(query)
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
-    const query = data.q
-
     if (!query) return null
-
     router.push(`/search?q=${query}`)
   }
+
+  useEffect(() => {
+    router.push(`/search?q=${debouncedSearch}`)
+  }, [debouncedSearch, router])
+
+  useEffect(() => {
+    !queryParam && setQuery('')
+  }, [queryParam])
 
   return (
     <form
@@ -37,17 +42,17 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
       )}
       {...props}
     >
-      <label htmlFor="search" className="sr-only">
-        Pesquisar
+      <label htmlFor="search">
+        <span className="sr-only">Pesquisar</span>
+        <Search className="size-5" />
       </label>
-
-      <Search />
 
       <input
         name="q"
         id="search"
         type="text"
-        defaultValue={query ?? ''}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Procure em suas notas..."
         className={cn(
           'w-full bg-transparent outline-none placeholder:text-muted-foreground',

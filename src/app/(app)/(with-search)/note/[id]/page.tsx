@@ -5,10 +5,11 @@ import { redirect } from 'next/navigation'
 import { getNote } from '@/api/get-note'
 import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
-import { EditNoteButton } from '@/components/edit-note-button'
 import { ParsedContent } from '@/components/parsed-content'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/utils/format-date'
+
+import { EditNoteButton } from './_components/edit-note-button'
 
 interface NotePageProps {
   params: {
