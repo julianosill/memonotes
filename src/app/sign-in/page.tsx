@@ -7,6 +7,7 @@ import bgImage from '@/assets/login-bg.jpg'
 import { LogoMemonotes } from '@/components/logo/memonotes'
 import { TextLink } from '@/components/ui/text-link'
 import { nextAuthConfig } from '@/libs/next-auth'
+import { cn } from '@/utils/class-name-merge'
 
 import { AboutProject } from './_components/about-project'
 import { GoogleButton } from './_components/google-button'
