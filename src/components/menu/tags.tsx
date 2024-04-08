@@ -12,7 +12,7 @@ export function Tags({ tags }: TagsProps) {
   const { onNavigation } = useSidebar()
 
   return (
-    <section className="flex-1 pt-6">
+    <section className="flex-1 py-6">
       <span className="font-semibold text-memonotes-300 dark:text-memonotes-400 md:text-sm">
         Tags
       </span>

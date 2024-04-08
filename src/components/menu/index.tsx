@@ -25,7 +25,7 @@ export async function Menu() {
         <AddNoteButton />
       </section>
 
-      <Tags tags={tags} />
+      {tags.length > 0 && <Tags tags={tags} />}
 
       <Account user={user} />
     </Sidebar>

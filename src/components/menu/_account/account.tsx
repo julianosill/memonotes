@@ -23,7 +23,7 @@ export function Account({ user }: AccountProps) {
   const [firstName] = user.name?.split(' ') ?? ['Visitante']
 
   return (
-    <section className="mt-6 border-t border-memonotes-500 pt-4 dark:border-memonotes-800">
+    <section className="mt-auto border-t border-memonotes-500 pt-4 dark:border-memonotes-800">
       <Dialog.Root>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger
