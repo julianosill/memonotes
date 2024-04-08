@@ -58,11 +58,10 @@ export default async function SignInPage() {
       <div className="relative h-full flex-1 max-md:fixed max-md:inset-0">
         <Image
           src={bgImage}
+          quality={100}
           className="h-full w-full object-cover max-md:opacity-20 md:rounded-3xl"
           alt="Mulher sentada, em uma mesa ao lado de fora de uma cafeteria, com um laptop em sua frente"
           priority
-          width={1464}
-          height={984}
         />
         <p className="absolute bottom-2 right-4 text-center text-[0.65rem] text-muted-foreground max-md:left-4 md:-bottom-5">
           Photo by Andrea Piacquadio from Pexels
