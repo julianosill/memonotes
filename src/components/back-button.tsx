@@ -3,7 +3,8 @@
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { ComponentProps } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { Button } from './ui/button'
 
@@ -17,7 +18,7 @@ export function BackButton({ className, ...props }: BackButtonProps) {
       onClick={router.back}
       variant="ghost"
       size="sm"
-      className={twMerge(
+      className={cn(
         'px-0 text-muted-foreground transition-all hover:px-3',
         className,
       )}

@@ -1,7 +1,8 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useAlertDialog } from './root'
 
@@ -50,7 +51,7 @@ export const Content = forwardRef(
             <AlertDialog.Content
               forceMount
               ref={forwardedRef}
-              className={twMerge(
+              className={cn(
                 'fixed inset-0 z-30 m-auto h-fit max-h-[80vh] w-fit overflow-y-auto p-8',
                 'rounded-xl border border-border-soft bg-card shadow-md',
                 '',

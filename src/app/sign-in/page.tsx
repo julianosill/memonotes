@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth/next'
-import { twMerge } from 'tailwind-merge'
 
 import bgImage from '@/assets/login-bg.jpg'
 import { LogoMemonotes } from '@/components/logo/memonotes'
@@ -24,7 +23,7 @@ export default async function SignInPage() {
     <div className="mx-auto flex min-h-screen max-w-[1920px] items-center p-8 md:h-screen lg:p-12">
       <div className="z-10 md:w-[280px] lg:w-[360px]">
         <main
-          className={twMerge(
+          className={cn(
             'rounded-2xl border border-transparent bg-card shadow-lg dark:border-border-soft',
             'flex flex-col justify-center gap-16 px-8 py-12',
             'md:w-[360px] md:translate-x-16',

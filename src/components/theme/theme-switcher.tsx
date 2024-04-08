@@ -4,7 +4,8 @@ import * as Switch from '@radix-ui/react-switch'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 export const ThemeSwitcher = forwardRef(
   (
@@ -28,7 +29,7 @@ export const ThemeSwitcher = forwardRef(
         checked={isDarkTheme}
         onCheckedChange={handleToggleTheme}
         title="Alterar tema"
-        className={twMerge(
+        className={cn(
           'relative flex items-center rounded-full border border-zinc-200 bg-zinc-200/50 outline-none transition-colors',
           'dark:border-zinc-800 dark:bg-zinc-900/50',
           'focus-visible:outline-1 focus-visible:outline-zinc-200 dark:focus-visible:outline-zinc-700',

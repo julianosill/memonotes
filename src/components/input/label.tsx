@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useInput } from './root'
 
@@ -14,7 +15,7 @@ export function Label(props: LabelProps) {
     <label
       htmlFor={id}
       {...props}
-      className={twMerge(
+      className={cn(
         'text-sm font-medium text-muted-foreground lg:text-base',
         props.className,
       )}

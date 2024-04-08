@@ -1,7 +1,8 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useTooltip } from './root'
 
@@ -33,7 +34,7 @@ export const Content = forwardRef(
               asChild
               ref={forwardedRef}
               sideOffset={4}
-              className={twMerge(
+              className={cn(
                 'z-30 rounded-md bg-background px-3 py-2 text-sm shadow-lg ring-1 ring-border-soft',
                 className,
               )}

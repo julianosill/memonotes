@@ -3,7 +3,8 @@
 import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ComponentProps, FormEvent } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 type SearchFormProps = ComponentProps<'form'>
 
@@ -28,7 +29,7 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
   return (
     <form
       onSubmit={handleSearch}
-      className={twMerge(
+      className={cn(
         'group relative flex w-64 items-center gap-4 border-b-2 py-2 max-md:w-full',
         'border-transparent text-muted-foreground',
         'transition-colors focus-within:border-border focus-within:text-foreground',
@@ -48,7 +49,7 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
         type="text"
         defaultValue={query ?? ''}
         placeholder="Procure em suas notas..."
-        className={twMerge(
+        className={cn(
           'w-full bg-transparent outline-none placeholder:text-muted-foreground',
         )}
         required

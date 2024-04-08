@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useInput } from './root'
 
@@ -15,7 +16,7 @@ export function Control(props: ControlProps) {
       id={id}
       type={props.type ? props.type : 'text'}
       {...props}
-      className={twMerge(
+      className={cn(
         'w-full bg-transparent text-foreground outline-none placeholder:text-muted-foreground',
         props.className,
       )}

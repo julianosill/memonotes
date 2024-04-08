@@ -2,9 +2,9 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { ForwardedRef, forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
 
 import { Button } from '@/components/ui/button'
+import { cn } from '@/utils/class-name-merge'
 
 import { useDialog } from './root'
 
@@ -52,7 +52,7 @@ export const Content = forwardRef(
             <Dialog.Content
               forceMount
               ref={forwardedRef}
-              className={twMerge(
+              className={cn(
                 'fixed inset-0 z-20 m-auto flex h-screen w-full max-w-[768px] flex-col overflow-y-auto bg-card px-8 py-12 sm:p-12 md:justify-center',
                 'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground',
                 'md:max-h-[80vh] md:w-10/12',

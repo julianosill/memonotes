@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 import { useInput } from './root'
 
@@ -14,7 +15,7 @@ export function Textarea(props: TextareaProps) {
     <textarea
       id={id}
       {...props}
-      className={twMerge(
+      className={cn(
         'h-full min-h-full w-full bg-transparent text-foreground outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground placeholder:text-muted-foreground',
         props.className,
       )}

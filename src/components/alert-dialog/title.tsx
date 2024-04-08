@@ -1,5 +1,6 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
-import { twMerge } from 'tailwind-merge'
+
+import { cn } from '@/utils/class-name-merge'
 
 export function Title({
   className,
@@ -7,7 +8,7 @@ export function Title({
 }: AlertDialog.AlertDialogTitleProps) {
   return (
     <AlertDialog.Title
-      className={twMerge('text-lg font-medium text-strong', className)}
+      className={cn('text-lg font-medium text-strong', className)}
       {...props}
     />
   )
