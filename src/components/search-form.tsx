@@ -24,8 +24,11 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
   }
 
   useEffect(() => {
-    router.push(`/search?q=${debouncedSearch}`)
-  }, [debouncedSearch, router])
+    if (query.length > 2) {
+      router.push(`/search?q=${debouncedSearch}`)
+    }
+    // eslint-disable-next-line
+  }, [debouncedSearch])
 
   useEffect(() => {
     !queryParam && setQuery('')
