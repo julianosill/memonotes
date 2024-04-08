@@ -6,7 +6,7 @@ export function Skeleton({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'animate-pulse rounded-xl border border-transparent bg-card opacity-50 shadow dark:border-border-soft',
+        'animate-pulse rounded-xl border border-transparent bg-card shadow dark:border-border-soft',
         className,
       )}
       {...props}
