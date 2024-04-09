@@ -46,7 +46,7 @@ export default async function SignInPage() {
             <p className="text-xs text-muted-foreground">
               Desenvolvido por{' '}
               <TextLink
-                href="https://julianosill.vercel.app/"
+                href="https://julianosill.com.br"
                 className="text-muted-foreground"
               >
                 Juliano Sill

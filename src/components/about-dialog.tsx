@@ -41,7 +41,7 @@ export function AboutDialog({ trigger }: AboutDialogProps) {
 
       <p className="mt-2 text-sm">
         Desenvolvido por{' '}
-        <TextLink href="https://github.com/julianosill">Juliano Sill</TextLink>
+        <TextLink href="https://julianosill.com.br">Juliano Sill</TextLink>
       </p>
     </Dialog.Content>
   )
