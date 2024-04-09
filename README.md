@@ -4,7 +4,7 @@
 
 Aplicação web para gerenciar notas de texto, incluindo a função de transcrição em tempo real (Speech to Text) com uso da `Speech Recognition Web API`. Foi desenvolvida em Next.js 14, com autenticação através do Google e integração com Firebase (banco de dados NoSQL). Também conta com implemetação de recursos de acessibilidade, usabilidade e boas aplicações de UI e UX design.
 
-🔗 [Acesse a aplicação](https://memonotes-js.vercel.app)
+🔗 [Acesse a aplicação](https://memonotes.julianosill.com.br)
 
 Obs.: a transcrição (Speech to Text) só está disponível em poucos navegadores até o momento, como Chrome e Safari.
 Confira os navegadores compatíveis [nesta página](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility).
