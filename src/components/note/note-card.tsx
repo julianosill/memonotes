@@ -26,7 +26,7 @@ export function NoteCard({ note }: NoteCardProps) {
 
       <Link href={`/note/${note.id}`} className="flex-1">
         <h2 className="pb-2 pt-3 text-base font-semibold leading-snug text-strong transition-colors hover:text-primary lg:py-4 lg:text-lg">
-          {note.title}
+          {getExcerpt(note.title, 60)}
         </h2>
         <p className="text-sm leading-relaxed text-card-foreground">
           {getExcerpt(note.content)}
