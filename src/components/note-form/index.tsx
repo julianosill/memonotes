@@ -8,6 +8,7 @@ import { Input } from '../input'
 import { Popover } from '../popover'
 import { Button } from '../ui/button'
 import { SpeechToTextDialog } from './speech-to-text-dialog'
+import { TextEditor } from './text-editor'
 import { useNoteForm } from './useNoteForm'
 
 interface NoteFormProps {
@@ -55,13 +56,8 @@ export function NoteForm({ note }: NoteFormProps) {
             <SpeechToTextDialog onAddTranscriptionToNote={addTranscription} />
           )}
         </div>
-        <Input.Wrapper className="min-h-[160px] flex-1">
-          <Input.Textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Digite ou grave seu áudio para transcrever"
-            required
-          />
+        <Input.Wrapper className="min-h-[160px] flex-1 p-0">
+          <TextEditor content={content} onChange={setContent} />
         </Input.Wrapper>
       </Input.Root>
 

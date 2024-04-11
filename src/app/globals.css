@@ -9,6 +9,7 @@
     --strong: #27272A;
     --card: #FFFFFF;
     --card-foreground: #71717A;
+    --card-strong: #52525B;
     --primary: #6484AC;
     --primary-foreground:#FAFAFA;
     --secondary:#D3E0EA;
@@ -31,6 +32,7 @@
     --strong: #FAFAFA;
     --card: #18181B;
     --card-foreground: #A1A1AA;
+    --card-strong: #D4D4D8;
     --primary: #769ABB;
     --primary-foreground:#FAFAFA;
     --secondary:#4C5F81;
@@ -54,4 +56,5 @@
   a:focus-visible {
     @apply outline outline-2 outline-ring outline-offset-4 rounded;
   }
+
 }

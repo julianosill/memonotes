@@ -38,6 +38,7 @@ const config: Config = {
         card: {
           DEFAULT: 'var(--card)',
           foreground: 'var(--card-foreground)',
+          strong: 'var(--card-strong)',
         },
         primary: {
           DEFAULT: 'var(--primary)',
@@ -77,8 +78,30 @@ const config: Config = {
       animation: {
         revolve: 'revolve 750ms ease-in-out 1',
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': 'var(--card-foreground)',
+            '--tw-prose-headings': 'var(--strong)',
+            '--tw-prose-bold': 'var(--card-strong)',
+            '--tw-prose-lead': 'var(--primary)',
+            '--tw-prose-links': 'var(--primary)',
+            '--tw-prose-counters': 'var(--muted-foreground)',
+            '--tw-prose-bullets': 'var(--muted-foreground)',
+            '--tw-prose-hr': 'var(--muted-foreground)',
+            '--tw-prose-quotes': 'var(--card-foreground)',
+            '--tw-prose-quote-borders': 'var(--muted-foreground)',
+            '--tw-prose-captions': 'var(--muted-foreground)',
+            '--tw-prose-code': 'var(--muted-foreground)',
+            '--tw-prose-pre-code': 'var(--foreground)',
+            '--tw-prose-pre-bg': 'var(--muted)',
+            '--tw-prose-th-borders': 'var(--muted)',
+            '--tw-prose-td-borders': 'var(--muted)',
+          },
+        },
+      }),
     },
   },
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [require('tailwind-scrollbar'), require('@tailwindcss/typography')],
 }
 export default config
