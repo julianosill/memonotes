@@ -1,5 +1,7 @@
 import { ComponentProps, createContext, useContext, useId } from 'react'
 
+import { cn } from '@/utils/class-name-merge'
+
 type RootProps = ComponentProps<'div'>
 
 interface InputContextType {
@@ -8,12 +10,12 @@ interface InputContextType {
 
 const InputContext = createContext({} as InputContextType)
 
-export function Root(props: RootProps) {
+export function Root({ className, ...props }: RootProps) {
   const id = useId()
 
   return (
     <InputContext.Provider value={{ id }}>
-      <div {...props} />
+      <div className={cn('relative', className)} {...props} />
     </InputContext.Provider>
   )
 }
