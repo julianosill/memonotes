@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-thumb-memonotes-500`}
+      className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-500/50`}
       suppressHydrationWarning
     >
       <body className="antialiased">
