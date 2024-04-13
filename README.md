@@ -1,4 +1,4 @@
-![Imagem com o logotipo Memonotes e uma tela inicial da aplicação ao lado](readme/cover-memonotes.png)
+![Imagem com o logotipo Memonotes e uma tela inicial da aplicação ao lado](.github/readme/cover-memonotes.png)
 
 # Memonotes
 
