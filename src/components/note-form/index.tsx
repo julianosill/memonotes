@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Placeholder from '@tiptap/extension-placeholder'
-import { EditorContent, useEditor } from '@tiptap/react'
+import { useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -13,11 +13,11 @@ import { z } from 'zod'
 import { INote } from '@/@types/note'
 import { createNote } from '@/api/create-note'
 import { updateNote } from '@/api/update-note'
-import { cn } from '@/utils/class-name-merge'
 import { parseTags } from '@/utils/parse-tags'
 
 import { Input } from '../input'
 import { FormActions } from './_components/actions'
+import { ContentEditor } from './_components/content-editor'
 import { TagsInstructions } from './_components/tags-instructions'
 import { TranscribeDialog } from './_components/transcribe'
 
@@ -61,7 +61,7 @@ export function NoteForm({ note }: { note?: INote }) {
     content: note?.content ?? '',
     editorProps: {
       attributes: {
-        class: 'outline-none h-full px-6 py-5',
+        class: 'outline-none h-full',
       },
     },
     onUpdate({ editor }) {
@@ -180,15 +180,7 @@ export function NoteForm({ note }: { note?: INote }) {
           )}
         </div>
         <Input.Wrapper className="min-h-[160px] flex-1 p-0">
-          <EditorContent
-            editor={editor}
-            className={cn(
-              'prose h-full w-full',
-              'prose-headings:mb-4 prose-headings:mt-10 prose-headings:font-semibold',
-              'prose-p:mb-3 prose-p:mt-0 prose-p:leading-relaxed',
-              'prose-strong:font-semibold',
-            )}
-          />
+          <ContentEditor editor={editor} />
         </Input.Wrapper>
         {errors.content && <Input.Error>{errors.content.message}</Input.Error>}
       </Input.Root>
