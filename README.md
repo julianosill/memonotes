@@ -13,12 +13,13 @@ Confira os navegadores compatíveis [nesta página](https://developer.mozilla.or
 
 ![next](https://img.shields.io/badge/next.js-292b36?style=for-the-badge&logo=next.js)
 ![react](https://img.shields.io/badge/react-292b36?style=for-the-badge&logo=react)
+![reacthookform](https://img.shields.io/badge/react--hook--form-292b36?style=for-the-badge&logo=reacthookform)
+![zod](https://img.shields.io/badge/zod-292b36?style=for-the-badge&logo=zod)
 ![firebase](https://img.shields.io/badge/firebase-292b36?style=for-the-badge&logo=firebase)
 ![next-auth](https://img.shields.io/badge/next--auth-292b36?style=for-the-badge)
 ![framer](https://img.shields.io/badge/framer--motion-292b36?style=for-the-badge&logo=framer)
 ![tailwindcss](https://img.shields.io/badge/tailwindcss-292b36?style=for-the-badge&logo=tailwindcss)
 ![radix-ui](https://img.shields.io/badge/radix-292b36?style=for-the-badge&logo=radixui)
-![zod](https://img.shields.io/badge/zod-292b36?style=for-the-badge&logo=zod)
 
 ## Funcionalidades e características
 
