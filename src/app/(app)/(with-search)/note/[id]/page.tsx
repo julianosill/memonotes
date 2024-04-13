@@ -1,3 +1,4 @@
+import parse from 'html-react-parser'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -5,8 +6,8 @@ import { redirect } from 'next/navigation'
 import { getNote } from '@/api/get-note'
 import { BackButton } from '@/components/back-button'
 import { DeleteNote } from '@/components/delete-note'
-import { ParsedContent } from '@/components/parsed-content'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/utils/class-name-merge'
 import { formatDate } from '@/utils/format-date'
 
 import { EditNoteButton } from './_components/edit-note-button'
@@ -46,8 +47,15 @@ export default async function NotePage({ params }: NotePageProps) {
 
       <h2 className="py-8 text-2xl font-semibold text-strong">{note.title}</h2>
 
-      <div className="flex-1 leading-relaxed text-card-foreground">
-        <ParsedContent text={note.content} />
+      <div
+        className={cn(
+          'prose max-w-full flex-1',
+          'prose-headings:mb-4 prose-headings:mt-10 prose-headings:font-semibold',
+          'prose-p:mb-3 prose-p:mt-0 prose-p:leading-relaxed',
+          'prose-strong:font-semibold',
+        )}
+      >
+        {parse(note.content)}
       </div>
 
       <footer className="mt-12 flex gap-6 border-t border-border-soft pt-6 max-lg:flex-col lg:gap-12">

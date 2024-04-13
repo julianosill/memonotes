@@ -1,4 +1,5 @@
 import { Control } from './control'
+import { Error } from './error'
 import { Label } from './label'
 import { Root } from './root'
 import { Textarea } from './textarea'
@@ -10,4 +11,5 @@ export const Input = {
   Wrapper,
   Control,
   Textarea,
+  Error,
 }
