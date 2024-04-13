@@ -49,7 +49,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
       <div
         className={cn(
-          'prose flex-1',
+          'prose max-w-full flex-1',
           'prose-headings:mb-4 prose-headings:mt-10 prose-headings:font-semibold',
           'prose-p:mb-3 prose-p:mt-0 prose-p:leading-relaxed',
           'prose-strong:font-semibold',

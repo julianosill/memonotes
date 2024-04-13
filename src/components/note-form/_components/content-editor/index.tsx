@@ -22,7 +22,7 @@ export function ContentEditor({ editor }: EditorContentProps) {
       <EditorContent
         editor={editor}
         className={cn(
-          'prose h-full',
+          'prose h-full max-w-full',
           'prose-headings:mb-4 prose-headings:mt-10 prose-headings:font-semibold',
           'prose-p:mb-3 prose-p:mt-0 prose-p:leading-relaxed',
           'prose-strong:font-semibold',
